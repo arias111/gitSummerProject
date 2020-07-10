@@ -22,35 +22,26 @@ class ViewController: UIViewController {
       habbits.register(UINib(nibName: "HabbitCell", bundle: nil) , forCellWithReuseIdentifier: cellID)
     }
     
-
-//    @IBAction func GoGoodHabbits(_ sender: Any) {
-//        let newVC = storyboard?.instantiateViewController(withIdentifier: "NewHabbit") as! NewHabbit
-//        newVC.GoodOrBad!.text! = "new new new"
-//        self.present(newVC, animated: true, completion: nil)
-//    }
-//
-//    @IBAction func GoBadHabbits(_ sender: Any) {
-//    }
-//
-    
+//    для перехода через +
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "GoToGood" {
         let newVC = segue.destination as! NewHabbit
-            if newVC.GoodOrBad != nil {
-               newVC.GoodOrBad.text = "Hi"
-                print("do")
-            } else {
-                print("no")
-            }
+            newVC.textHab = "НОВАЯ ПОЛЕЗНАЯ ПРИВЫЧКA"
+        }
+        
+        
+        if segue.identifier == "GoToBad" {
+        let newVC = segue.destination as! NewHabbit
+            newVC.textHab = "НОВАЯ ВРЕДНАЯ ПРИВЫЧКA"
         }
     }
     
-    @IBAction func GoGood(_ sender: Any) {
-        performSegue(withIdentifier: "GoToGood", sender: nil)
-    }
 }
 
+//для плашек
 extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout{
+
+//    количество плашек
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if (allHab.count > 8) {
             return 8;
@@ -60,6 +51,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
         
     }
     
+//    для отображения плашек
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! HabbitCell
         cell.text.text = allHab[indexPath.item]

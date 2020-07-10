@@ -14,16 +14,23 @@ class NewHabbit: UIViewController {
     @IBOutlet weak var NameHabbit: UITextField!
     @IBOutlet weak var PriorityHabbit: UISegmentedControl!
     
-    var habbit:(name: String,Priority: Int) = ("",0)
+    var textHab:String!
     
+    var habbit:(name: String,Priority: Int)!
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//       присвоем текст наверху который
+        GoodOrBad.text = textHab
     }
     
+//    создает новую привычку
     @IBAction func Do(_ sender: Any) {
-        
-        if(PriorityHabbit.selectedSegmentIndex != 0) && (NameHabbit.text != nil){
+        if NameHabbit.text != nil {
         habbit = (NameHabbit.text!,PriorityHabbit.selectedSegmentIndex)
+            print(habbit!)
         }
     }
 
