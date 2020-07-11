@@ -192,6 +192,10 @@
                                             <action selector="refresh:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QgX-ij-Lzf"/>
                                         </connections>
                                     </button>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FlQ-g2-jUb">
+                                        <rect key="frame" x="8" y="84" width="269" height="316"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                 </subviews>
                             </view>
                         </subviews>
@@ -201,6 +205,7 @@
                     <connections>
                         <outlet property="drops" destination="C55-N2-fJv" id="soE-dq-KQQ"/>
                         <outlet property="habbitsTable" destination="pj2-WJ-h00" id="4DB-eY-IJR"/>
+                        <outlet property="treeImage" destination="FlQ-g2-jUb" id="xYZ-ny-rMf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

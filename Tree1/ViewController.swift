@@ -9,16 +9,29 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var habbitsTable: UICollectionView!
     let cellID = "cellID"
     let defaults = UserDefaults.standard
     
     @IBOutlet weak var drops: UILabel!
+
+    @IBOutlet weak var treeImage: UIImageView!  //O
+    
+    var listTree: [UIImage?] = [                //O
+        UIImage(named: "tree#1"),
+        UIImage(named: "tree#2"),
+        UIImage(named: "tree#3"),
+        UIImage(named: "tree#4"),
+        UIImage(named: "tree#5"),
+        UIImage(named: "tree#6")
+    ]
+
     
 //    обновить
     @IBAction func refresh(_ sender: Any) {
         let x = Tree.share.userData.drops
+        reloadTree()                            //O
         print("каплей: \(x)")
         drops.text = "Капель:\( x )"
         viewWillAppear(true)
@@ -41,8 +54,9 @@ class ViewController: UIViewController {
         habbitsTable.delegate = self
         
 //        если делать через .xib
-      habbitsTable.register(UINib(nibName: "HabbitCell", bundle: nil) , forCellWithReuseIdentifier: cellID)
-    
+        habbitsTable.register(UINib(nibName: "HabbitCell", bundle: nil) , forCellWithReuseIdentifier: cellID)
+        
+        reloadTree()                            //O
     }
     
 //    для перехода через +
@@ -99,6 +113,31 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
 //        размер всего экрана = 400 , промежутки = 5*10,
         return CGSize(width: 85, height: 70)
     }
+    
+    // MARK: - Tree
+                                    
+            
+       func reloadTree()  {                 //O
+           var index = 0
+        let value = Tree.share.userData.drops
+           if value >= 0 {
+               if value <= 10 {
+                   index = 0
+                   } else
+                   if value <= 20 {
+                       index = 1
+                   } else if value <= 30 {
+                       index = 2
+                   } else if value <= 40 {
+                       index = 3
+                   } else if value <= 50 {
+                       index = 4
+                   } else {
+                       index = 5
+               }
+           }
+           self.treeImage.image = self.listTree[index]
+       }
     
     
 }

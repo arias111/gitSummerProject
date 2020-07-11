@@ -9,6 +9,8 @@
 import Foundation
 
 class Tree{
+    var test = ViewController()
+    
 //    все что сохронять о пользователе
     let defaults = UserDefaults.standard
     static let share = Tree()
@@ -28,7 +30,7 @@ class Tree{
             if let data = defaults.value(forKey: "userData") as? Data{
                 return try! PropertyListDecoder().decode(dataU.self, from: data)
             } else {
-                return dataU(name: "",drops: 0,image: "image")
+                return dataU(name: "", drops: 0, image: "image")
             }
         }
 
