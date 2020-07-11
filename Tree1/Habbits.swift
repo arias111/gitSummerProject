@@ -30,7 +30,6 @@ class Habbits{
                 return [Habbit]()
             }
         }
-
         set{
             if let data = try? PropertyListEncoder().encode(newValue) {
             defaults.set(data, forKey: "HabbitArray")
