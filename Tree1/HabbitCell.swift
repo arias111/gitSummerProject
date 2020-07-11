@@ -15,6 +15,14 @@ class HabbitCell: UICollectionViewCell {
     @IBOutlet weak var text: UILabel!
     @IBOutlet weak var color: UIView!
     
+    var piority:Int!
+    
+//    если нажать на плашку
+    @IBAction func pressHabbit(_ sender: Any) {
+        let x = Tree.share
+        x.saveData(name: x.userData.name, drops: x.userData.drops + piority, image: "")
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
