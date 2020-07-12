@@ -14,6 +14,18 @@ class ViewController: UIViewController {
     let cellID = "cellID"
     let defaults = UserDefaults.standard
     
+    @IBOutlet weak var weatherImage: UIImageView!
+    @IBOutlet weak var weatherDegrees: UILabel!
+    @IBOutlet weak var weatherText: UILabel!
+    @IBOutlet weak var weatherVar: UILabel!
+    
+    @IBOutlet weak var vredText: UILabel!
+    @IBOutlet weak var vredImage: UIImageView!
+    
+    let date = Date()
+    let calendar = Calendar.current
+    var minus = 0
+    
     @IBOutlet weak var drops: UILabel!
 
     @IBOutlet weak var treeImage: UIImageView!  //O
@@ -56,6 +68,18 @@ class ViewController: UIViewController {
 //        если делать через .xib
         habbitsTable.register(UINib(nibName: "HabbitCell", bundle: nil) , forCellWithReuseIdentifier: cellID)
         
+        let day = calendar.component(.day, from: date)
+            let hour = calendar.component(.hour, from: date)
+            let month = calendar.component(.month, from: date)
+            minus = weatherDo(sender:day,hour:hour,month:month);
+            weatherVar.text = String(minus)
+        
+            minus = minus + vredDo(day:day)
+        
+        Tree.share.userData.drops = Tree.share.userData.drops + minus
+        
+        
+        
         reloadTree()                            //O
     }
     
@@ -77,7 +101,69 @@ class ViewController: UIViewController {
         self.habbitsTable.reloadData()
     }
     
-
+//    погода
+    func weatherDo(sender:Int,hour:Int,month:Int) -> Int{
+        //какая погода
+         let weather = (sender * (31-sender) * (13 - month))%30
+        weatherDegrees.text = String(weather)
+        
+        //короткие дни
+         var time:Int
+        if((month > 9)&&(month < 4)){
+            time = 14
+        } else {
+            time = 17
+        }
+        
+        if(hour > time) {
+            weatherImage.image = UIImage(named: "weather-night")
+            print("night")
+        } else {
+            weatherImage.image = UIImage(named: "weather-day")
+        print("day")
+        }
+        
+        switch weather {
+        case 1...6:
+            weatherText.text = "Холодная погода"
+            return -0
+        case 7...9:
+            weatherText.text = "Холодная погода"
+            return -1
+        case 10...15:
+            weatherText.text = "Прохладная погода"
+            return -2
+        case 16...21:
+            weatherText.text = "Хорошая погода"
+            return -3
+        case 21...30:
+            weatherText.text = "Жаркая погода"
+            return -4
+        default:
+            weatherText.text = "Холодная погода"
+            return -0;
+        }
+    }
+    
+//    вредители
+    func vredDo(day:Int) -> Int{
+        let vred:Int
+        switch day {
+        case 9...13:
+            vred = -2;
+        default:
+            vred = 0;
+        }
+        
+        if(vred == 0){
+            vredText.text = "уже совсем  скоро"
+            vredImage.image = UIImage(named: "noVred")
+        } else {
+            vredText.text = "начался -2💧"
+            vredImage.image = UIImage(named: "yesVred")
+        }
+        return vred
+    }
     
     
 }
@@ -138,6 +224,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
            }
            self.treeImage.image = self.listTree[index]
        }
+    
     
     
 }
