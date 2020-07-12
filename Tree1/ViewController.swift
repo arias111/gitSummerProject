@@ -28,9 +28,9 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var drops: UILabel!
 
-    @IBOutlet weak var treeImage: UIImageView!  //O
+    @IBOutlet weak var treeImage: UIImageView!
     
-    var listTree: [UIImage?] = [                //O
+    var listTree: [UIImage?] = [
         UIImage(named: "tree#1"),
         UIImage(named: "tree#2"),
         UIImage(named: "tree#3"),
@@ -43,7 +43,7 @@ class ViewController: UIViewController {
 //    обновить
     @IBAction func refresh(_ sender: Any) {
         let x = Tree.share.userData.drops
-        reloadTree()                            //O
+        reloadTree()
         print("каплей: \(x)")
         drops.text = "Капель:\( x )"
         viewWillAppear(true)
@@ -80,7 +80,7 @@ class ViewController: UIViewController {
         
         
         
-        reloadTree()                            //O
+        reloadTree()
     }
     
 //    для перехода через +
@@ -202,26 +202,28 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
     
     // MARK: - Tree
                                     
-            
-       func reloadTree()  {                 //O
-           var index = 0
+//     выбор изображения дерева исходя из кол-ва капель
+       func reloadTree()  {
+        var index = 0
         let value = Tree.share.userData.drops
-           if value >= 0 {
-               if value <= 10 {
-                   index = 0
-                   } else
-                   if value <= 20 {
-                       index = 1
-                   } else if value <= 30 {
-                       index = 2
-                   } else if value <= 40 {
-                       index = 3
-                   } else if value <= 50 {
-                       index = 4
-                   } else {
-                       index = 5
-               }
-           }
+        switch value {
+            
+            case 0...10 :
+                index = 0
+            case 11...20 :
+                index = 1
+            case 21...30 :
+                index = 2
+            case 31...40 :
+                index = 3
+            case 41...50:
+                index = 4
+            case 51...INTPTR_MAX:
+                index = 5
+            
+            default:
+                index = 0
+        }
            self.treeImage.image = self.listTree[index]
        }
     
