@@ -60,8 +60,8 @@
                                     <segment title="3"/>
                                 </segments>
                             </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="H" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Knb-s6-cSx">
-                                <rect key="frame" x="126" y="649" width="13" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Knb-s6-cSx">
+                                <rect key="frame" x="0.0" y="649" width="414" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -73,7 +73,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="1dg-Do-lw3"/>
                     <connections>
-                        <outlet property="Erorr" destination="Knb-s6-cSx" id="G1z-fn-JAE"/>
+                        <outlet property="Erorr" destination="Knb-s6-cSx" id="Hhd-kb-KZe"/>
                         <outlet property="GoodOrBad" destination="FAK-Pl-yhL" id="sP3-Lh-2u6"/>
                         <outlet property="NameHabbit" destination="JB7-oK-Gaf" id="UiB-fI-eIB"/>
                         <outlet property="PriorityHabbit" destination="GUC-wY-b7E" id="ad8-MC-dx8"/>
@@ -81,7 +81,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Er6-Ui-OaL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="738" y="165"/>
+            <point key="canvasLocation" x="737.68115942028987" y="164.73214285714286"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -263,7 +263,8 @@
                     </view>
                     <connections>
                         <outlet property="drops" destination="C55-N2-fJv" id="soE-dq-KQQ"/>
-                        <outlet property="habbitsTable" destination="pj2-WJ-h00" id="4DB-eY-IJR"/>
+                        <outlet property="habbitTableBad" destination="7gM-oJ-2yL" id="qBY-CP-I75"/>
+                        <outlet property="habbitsTableGood" destination="pj2-WJ-h00" id="a6N-CI-AEf"/>
                         <outlet property="treeImage" destination="FlQ-g2-jUb" id="xYZ-ny-rMf"/>
                         <outlet property="vredImage" destination="iEh-23-4rd" id="LTJ-0T-3Pk"/>
                         <outlet property="vredText" destination="41l-Ag-ZEb" id="eKn-wL-PjZ"/>

@@ -10,7 +10,10 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var habbitsTable: UICollectionView!
+    @IBOutlet weak var habbitsTableGood: UICollectionView!
+    
+    @IBOutlet weak var habbitTableBad: UICollectionView!
+    
     let cellID = "cellID"
     let defaults = UserDefaults.standard
     
@@ -62,11 +65,11 @@ class ViewController: UIViewController {
         Tree.share.saveData(name: "Rustem", drops: 10, image: "")
         
 //        для таблицы
-        habbitsTable.dataSource = self
-        habbitsTable.delegate = self
+        habbitsTableGood.dataSource = self
+        habbitsTableGood.delegate = self
         
 //        если делать через .xib
-        habbitsTable.register(UINib(nibName: "HabbitCell", bundle: nil) , forCellWithReuseIdentifier: cellID)
+        habbitsTableGood.register(UINib(nibName: "HabbitCell", bundle: nil) , forCellWithReuseIdentifier: cellID)
         
         let day = calendar.component(.day, from: date)
             let hour = calendar.component(.hour, from: date)
@@ -98,7 +101,7 @@ class ViewController: UIViewController {
 //    для обновления таблицы
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.habbitsTable.reloadData()
+        self.habbitsTableGood.reloadData()
     }
     
 //    погода

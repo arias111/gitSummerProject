@@ -28,11 +28,6 @@ class NewHabbit: UIViewController {
     @IBAction func Do(_ sender: Any) {
         if NameHabbit.text != "" {
             Habbits.share.saveHabbit(name: NameHabbit.text!, priority: PriorityHabbit.selectedSegmentIndex + 1, color: "red")
-            print("CreDrop: \(PriorityHabbit.selectedSegmentIndex)")
-            
-//            let newVc = storyboard?.instantiateViewController(withIdentifier: "Tree") as! ViewController
-//            self.present(newVc, animated: true, completion: nil)
-            
              dismiss(animated: true, completion: nil)
             
         } else {
