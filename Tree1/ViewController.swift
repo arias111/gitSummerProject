@@ -35,7 +35,18 @@ class ViewController: UIViewController {
         UIImage(named: "tree#5"),
         UIImage(named: "tree#6")
     ]
-
+    
+//     цвета ячеек
+    var listColoursCell: [UIImage?] = [
+        UIImage(named: "1"),
+        UIImage(named: "2"),
+        UIImage(named: "3"),
+        UIImage(named: "4"),
+        UIImage(named: "5"),
+        UIImage(named: "6"),
+        UIImage(named: "7"),
+        UIImage(named: "8")
+    ]
     
 //    обновить
     @IBAction func refresh(_ sender: Any) {
@@ -208,7 +219,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
         if (collectionView == habbitsTableGood)&&(Habbits.share.GoodHabbitsArray.count != 0) {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIDGood, for: indexPath) as! HabbitCell
         cell.text.text = Habbits.share.GoodHabbitsArray[indexPath.item].name
-        cell.color.backgroundColor = UIColor.green
+            cell.color.backgroundColor = UIColor(patternImage: listColoursCell[indexPath.item]!)
 //        зададам приоритет
         cell.piority = Habbits.share.GoodHabbitsArray[indexPath.item].priority
             print("good")
@@ -216,7 +227,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
         } else {
                     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIDBad, for: indexPath) as! HabbitCell
                     cell.text.text = Habbits.share.BadHabbitsArray[indexPath.item].name
-                    cell.color.backgroundColor = UIColor.red
+                    cell.color.backgroundColor = UIColor(patternImage: listColoursCell[7 - (indexPath.item)]!)
             //        зададам приоритет
                     cell.piority = Habbits.share.BadHabbitsArray[indexPath.item].priority
                     return cell
