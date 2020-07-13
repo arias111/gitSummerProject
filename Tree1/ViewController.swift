@@ -40,7 +40,6 @@ class ViewController: UIViewController {
     @IBAction func refresh(_ sender: Any) {
         let x = Tree.share.userData.drops
         reloadTree()
-        print("каплей: \(x)")
         drops.text = "Капель:\( x )"
         viewWillAppear(true)
     }
@@ -113,10 +112,8 @@ class ViewController: UIViewController {
 //        цвет погоды
         if(hour > time) {
             weatherImage.image = UIImage(named: "weather-night")
-            print("night")
         } else {
             weatherImage.image = UIImage(named: "weather-day")
-        print("day")
         }
         
 //        текст погоды
@@ -168,16 +165,16 @@ class ViewController: UIViewController {
     
 }
 
+
+
 //для плашек
 extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout{
 
 //    количество плашек
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        UserDefaults.standard.synchronize()
         if (Habbits.share.HabbitArray.count >= 8) {
             return 8;
         } else {
-            print(Habbits.share.HabbitArray.count)
             return Habbits.share.HabbitArray.count
         }
         
@@ -199,6 +196,8 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
 //        размер всего экрана = 400 , промежутки = 5*10,
         return CGSize(width: 85, height: 70)
     }
+    
+    
     
     // MARK: - Tree
                                     
