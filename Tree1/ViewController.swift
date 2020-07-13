@@ -4,9 +4,10 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var habbitsTableGood: UICollectionView!
-    @IBOutlet weak var habbitTableBad: UICollectionView!
+    @IBOutlet weak var habbitsTableBad: UICollectionView!
     
-    let cellID = "cellID"
+    let cellIDGood = "cellIDGood"
+    let cellIDBad = "cellIDBad"
     
     let defaults = UserDefaults.standard
     
@@ -60,8 +61,12 @@ class ViewController: UIViewController {
         habbitsTableGood.dataSource = self
         habbitsTableGood.delegate = self
         
+        habbitsTableBad.dataSource = self
+        habbitsTableBad.delegate = self
+        
 //        если делать через .xib
-        habbitsTableGood.register(UINib(nibName: "HabbitCell", bundle: nil) , forCellWithReuseIdentifier: cellID)
+        habbitsTableGood.register(UINib(nibName: "HabbitCell", bundle: nil) , forCellWithReuseIdentifier: cellIDGood)
+        habbitsTableBad.register(UINib(nibName: "HabbitCell", bundle: nil) , forCellWithReuseIdentifier: cellIDBad)
         
 //        для погоды календарь
         let day = calendar.component(.day, from: date)
@@ -75,6 +80,8 @@ class ViewController: UIViewController {
 //        вызов дерева
         reloadTree()
     }
+    
+    // MARK: - Plus
     
 //    для перехода через +
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -92,8 +99,10 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.habbitsTableGood.reloadData()
+        self.habbitsTableBad.reloadData()
     }
     
+    // MARK: - Weather
 //    погода
     func weatherDo(sender:Int,hour:Int,month:Int) -> Int{
         
@@ -139,6 +148,8 @@ class ViewController: UIViewController {
         }
     }
     
+    // MARK: - Vred
+    
 //    вредители
     func vredDo(day:Int) -> Int{
         let vred:Int
@@ -165,30 +176,51 @@ class ViewController: UIViewController {
     
 }
 
-
+// MARK: - Habbits
 
 //для плашек
 extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout{
 
 //    количество плашек
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if (Habbits.share.HabbitArray.count >= 8) {
+        print("goodArraycount1 \(Habbits.share.GoodHabbitsArray.count)")
+        print("badArraycount1 \(Habbits.share.BadHabbitsArray.count)")
+        
+        if(collectionView == habbitsTableGood){
+            print("GoodArraycount\(Habbits.share.GoodHabbitsArray.count)")
+            if (Habbits.share.GoodHabbitsArray.count >= 8) {
             return 8;
         } else {
-            return Habbits.share.HabbitArray.count
+            return Habbits.share.GoodHabbitsArray.count
         }
-        
+        } else{
+            print("badArraycount\(Habbits.share.BadHabbitsArray.count)")
+            if (Habbits.share.BadHabbitsArray.count >= 8) {
+                return 8;
+            } else {
+                return Habbits.share.BadHabbitsArray.count
+            }
+        }
     }
     
 //    для отображения плашек
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        UserDefaults.standard.synchronize()
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! HabbitCell
-        cell.text.text = Habbits.share.HabbitArray[indexPath.item].name
-        cell.color.backgroundColor = UIColor.red
+        if (collectionView == habbitsTableGood)&&(Habbits.share.GoodHabbitsArray.count != 0) {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIDGood, for: indexPath) as! HabbitCell
+        cell.text.text = Habbits.share.GoodHabbitsArray[indexPath.item].name
+        cell.color.backgroundColor = UIColor.green
 //        зададам приоритет
-        cell.piority = Habbits.share.HabbitArray[indexPath.item].priority
+        cell.piority = Habbits.share.GoodHabbitsArray[indexPath.item].priority
+            print("good")
         return cell
+        } else {
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIDBad, for: indexPath) as! HabbitCell
+                    cell.text.text = Habbits.share.BadHabbitsArray[indexPath.item].name
+                    cell.color.backgroundColor = UIColor.red
+            //        зададам приоритет
+                    cell.piority = Habbits.share.BadHabbitsArray[indexPath.item].priority
+                    return cell
+        }
     }
     
 //    рамеры плашек

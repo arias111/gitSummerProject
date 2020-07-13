@@ -263,8 +263,8 @@
                     </view>
                     <connections>
                         <outlet property="drops" destination="C55-N2-fJv" id="soE-dq-KQQ"/>
-                        <outlet property="habbitTableBad" destination="7gM-oJ-2yL" id="qBY-CP-I75"/>
-                        <outlet property="habbitsTableGood" destination="pj2-WJ-h00" id="a6N-CI-AEf"/>
+                        <outlet property="habbitsTableBad" destination="7gM-oJ-2yL" id="e5f-K9-Mhk"/>
+                        <outlet property="habbitsTableGood" destination="pj2-WJ-h00" id="1XG-s6-tcy"/>
                         <outlet property="treeImage" destination="FlQ-g2-jUb" id="xYZ-ny-rMf"/>
                         <outlet property="vredImage" destination="iEh-23-4rd" id="LTJ-0T-3Pk"/>
                         <outlet property="vredText" destination="41l-Ag-ZEb" id="eKn-wL-PjZ"/>

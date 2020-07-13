@@ -9,6 +9,7 @@
 import Foundation
 
 class Habbits{
+    
 //    все чтобы работало сохраниние привычек
     let defaults = UserDefaults.standard
     static let share = Habbits()
@@ -20,11 +21,13 @@ class Habbits{
         var color:String
     }
     
-//    массив из привычек
-    var HabbitArray:[Habbit]{
+    
+    
+//    массив хороших из привычек
+    var GoodHabbitsArray:[Habbit]{
 
         get{
-            if let data = defaults.value(forKey: "HabbitArray") as? Data{
+            if let data = defaults.value(forKey: "GoodHabbitArray") as? Data{
                 return try! PropertyListDecoder().decode([Habbit].self, from: data)
             } else {
                 return [Habbit]()
@@ -32,15 +35,41 @@ class Habbits{
         }
         set{
             if let data = try? PropertyListEncoder().encode(newValue) {
-            defaults.set(data, forKey: "HabbitArray")
+            defaults.set(data, forKey: "GoodHabbitArray")
             }
         }
 
     }
-    
-//    добавление привычки в массив
-    func saveHabbit(name:String, priority:Int, color:String){
+//    добавление хороших привычек в массив
+    func saveGoodHabbit(name:String, priority:Int, color:String){
         let habbit = Habbit(name: name,priority: priority,color: color)
-        HabbitArray.insert(habbit, at: 0)
+        GoodHabbitsArray.insert(habbit, at: 0)
     }
+    
+    
+    
+    
+    //    массив плохих из привычек
+        var BadHabbitsArray:[Habbit]{
+
+            get{
+                if let data = defaults.value(forKey: "BadHabbitArray") as? Data{
+                    return try! PropertyListDecoder().decode([Habbit].self, from: data)
+                } else {
+                    return [Habbit]()
+                }
+            }
+            set{
+                if let data = try? PropertyListEncoder().encode(newValue) {
+                defaults.set(data, forKey: "BadHabbitArray")
+                }
+            }
+
+        }
+        
+    //    добавление плохих привычки в массив
+        func saveBadHabbit(name:String, priority:Int, color:String){
+            let habbit = Habbit(name: name,priority: priority,color: color)
+            BadHabbitsArray.insert(habbit, at: 0)
+        }
 }

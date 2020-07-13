@@ -26,13 +26,18 @@ class NewHabbit: UIViewController {
     
 //    создает новую привычку
     @IBAction func Do(_ sender: Any) {
-        if NameHabbit.text != "" {
-            Habbits.share.saveHabbit(name: NameHabbit.text!, priority: PriorityHabbit.selectedSegmentIndex + 1, color: "red")
-             dismiss(animated: true, completion: nil)
-            
-        } else {
+        if NameHabbit.text == "" {
             Erorr.text = "Назовите привычку!"
         }
+        if GoodOrBad.text == "НОВАЯ ПОЛЕЗНАЯ ПРИВЫЧКA"{
+            Habbits.share.saveGoodHabbit(name: NameHabbit.text!, priority: PriorityHabbit.selectedSegmentIndex + 1, color: "red")
+            print("create good")
+        }
+        if GoodOrBad.text == "НОВАЯ ВРЕДНАЯ ПРИВЫЧКA"{
+            Habbits.share.saveBadHabbit(name: NameHabbit.text!, priority: (PriorityHabbit.selectedSegmentIndex + 1) * -1, color: "red")
+            print("create bad")
+        }
+             dismiss(animated: true, completion: nil)
     }
 
 }
