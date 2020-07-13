@@ -1,20 +1,13 @@
-//
-//  ViewController.swift
-//  Tree1
-//
-//  Created by Рустем on 09.07.2020.
-//  Copyright © 2020 Рустем. All rights reserved.
-//
 
 import UIKit
 
 class ViewController: UIViewController {
     
     @IBOutlet weak var habbitsTableGood: UICollectionView!
-    
     @IBOutlet weak var habbitTableBad: UICollectionView!
     
     let cellID = "cellID"
+    
     let defaults = UserDefaults.standard
     
     @IBOutlet weak var weatherImage: UIImageView!
@@ -30,9 +23,9 @@ class ViewController: UIViewController {
     var minus = 0
     
     @IBOutlet weak var drops: UILabel!
-
     @IBOutlet weak var treeImage: UIImageView!
     
+//    деревья
     var listTree: [UIImage?] = [
         UIImage(named: "tree#1"),
         UIImage(named: "tree#2"),
@@ -71,18 +64,16 @@ class ViewController: UIViewController {
 //        если делать через .xib
         habbitsTableGood.register(UINib(nibName: "HabbitCell", bundle: nil) , forCellWithReuseIdentifier: cellID)
         
+//        для погоды календарь
         let day = calendar.component(.day, from: date)
             let hour = calendar.component(.hour, from: date)
             let month = calendar.component(.month, from: date)
             minus = weatherDo(sender:day,hour:hour,month:month);
             weatherVar.text = String(minus)
-        
             minus = minus + vredDo(day:day)
-        
         Tree.share.userData.drops = Tree.share.userData.drops + minus
         
-        
-        
+//        вызов дерева
         reloadTree()
     }
     
@@ -106,11 +97,12 @@ class ViewController: UIViewController {
     
 //    погода
     func weatherDo(sender:Int,hour:Int,month:Int) -> Int{
-        //какая погода
+        
+//        какая погода
          let weather = (sender * (31-sender) * (13 - month))%30
         weatherDegrees.text = String(weather)
         
-        //короткие дни
+//        короткие дни
          var time:Int
         if((month > 9)&&(month < 4)){
             time = 14
@@ -118,6 +110,7 @@ class ViewController: UIViewController {
             time = 17
         }
         
+//        цвет погоды
         if(hour > time) {
             weatherImage.image = UIImage(named: "weather-night")
             print("night")
@@ -126,6 +119,7 @@ class ViewController: UIViewController {
         print("day")
         }
         
+//        текст погоды
         switch weather {
         case 1...6:
             weatherText.text = "Холодная погода"
@@ -151,6 +145,8 @@ class ViewController: UIViewController {
 //    вредители
     func vredDo(day:Int) -> Int{
         let vred:Int
+        
+//        цвет вредителей
         switch day {
         case 9...13:
             vred = -2;
@@ -158,6 +154,7 @@ class ViewController: UIViewController {
             vred = 0;
         }
         
+//        текст вредителей
         if(vred == 0){
             vredText.text = "уже совсем  скоро"
             vredImage.image = UIImage(named: "noVred")
@@ -209,8 +206,8 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
        func reloadTree()  {
         var index = 0
         let value = Tree.share.userData.drops
+        
         switch value {
-            
             case 0...10 :
                 index = 0
             case 11...20 :
