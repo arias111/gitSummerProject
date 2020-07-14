@@ -71,7 +71,9 @@ class ViewController: UIViewController {
         checkUsername()
         
 //        удаляю все данные перед проходом
-        defaults.removeObject(forKey: "HabbitArray")
+        defaults.removeObject(forKey: "GoodHabbitArray")
+        defaults.synchronize()
+        defaults.removeObject(forKey: "BadHabbitArray")
         defaults.synchronize()
         defaults.removeObject(forKey: "userData")
         defaults.synchronize()

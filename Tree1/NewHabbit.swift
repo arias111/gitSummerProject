@@ -28,6 +28,7 @@ class NewHabbit: UIViewController {
     @IBAction func Do(_ sender: Any) {
         if NameHabbit.text == "" {
             Erorr.text = "Назовите привычку!"
+            return
         }
         if GoodOrBad.text == "НОВАЯ ПОЛЕЗНАЯ ПРИВЫЧКA"{
             Habbits.share.saveGoodHabbit(name: NameHabbit.text!, priority: PriorityHabbit.selectedSegmentIndex + 1, color: "red")
