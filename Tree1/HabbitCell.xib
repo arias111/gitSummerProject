@@ -31,6 +31,9 @@
                                 <rect key="frame" x="60" y="0.0" width="17" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="three points"/>
+                                <connections>
+                                    <action selector="doSettings:" destination="gTV-IL-0wX" eventType="touchUpInside" id="2mu-le-bkc"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1JY-wp-F8Y">
                                 <rect key="frame" x="-5" y="-5" width="91" height="70"/>

@@ -232,8 +232,8 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
         if (collectionView == habbitsTableGood)&&(Habbits.share.GoodHabbitsArray.count != 0) {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIDGood, for: indexPath) as! HabbitCell
         cell.text.text = Habbits.share.GoodHabbitsArray[indexPath.item].name
-            cell.color.backgroundColor = UIColor(patternImage: listColoursCell[indexPath.item]!)
-//        зададам приоритет
+        cell.color.backgroundColor = UIColor(patternImage: listColoursCell[indexPath.item]!)
+        cell.index = indexPath.item
         cell.piority = Habbits.share.GoodHabbitsArray[indexPath.item].priority
             print("good")
         return cell
@@ -241,7 +241,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
                     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIDBad, for: indexPath) as! HabbitCell
                     cell.text.text = Habbits.share.BadHabbitsArray[indexPath.item].name
                     cell.color.backgroundColor = UIColor(patternImage: listColoursCell[7 - (indexPath.item)]!)
-            //        зададам приоритет
+                    cell.index = indexPath.item
                     cell.piority = Habbits.share.BadHabbitsArray[indexPath.item].priority
                     return cell
         }

@@ -14,6 +14,7 @@ class HabbitCell: UICollectionViewCell {
    
     @IBOutlet weak var text: UILabel!
     @IBOutlet weak var color: UIView!
+    var index:Int!
     
     var piority:Int!
     
@@ -23,6 +24,8 @@ class HabbitCell: UICollectionViewCell {
         x.saveData(name: x.userData.name, drops: x.userData.drops + piority, image: "")
     }
     
+    @IBAction func doSettings(_ sender: Any) {
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
     }
