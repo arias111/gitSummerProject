@@ -78,7 +78,7 @@ class ViewController: UIViewController {
         defaults.synchronize()
         
 //        задаю данные пользователя
-        Tree.share.saveData(name: "Rustem", drops: 10, image: "",goodHabits: 0, badHabits: 0)
+        Tree.share.saveData(name: "Rustem", drops: 10, image: "", goodHabits: 0, badHabits: 0)
         
 //        для таблицы
         habbitsTableGood?.dataSource = self
@@ -237,7 +237,6 @@ class ViewController: UIViewController {
             textBadHabits?.text = "\(Tree.share.userData.badHabits))"
             textDrops?.text = "\(Tree.share.userData.drops)"
         }
-        
         
     //  кнопка сохранения изменения имени пользователя
         @IBAction func changeUsernameButton(_ sender: Any) {

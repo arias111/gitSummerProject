@@ -29,7 +29,6 @@ class Tree{
     var userData:dataU{
 
         get{
-            
             if let data = defaults.value(forKey: "userData") as? Data{
                 return try! PropertyListDecoder().decode(dataU.self, from: data)
             } else {
