@@ -197,6 +197,69 @@ class ViewController: UIViewController {
         return vred
     }
     
+
+        // MARK: - Tree
+                                        
+    //     выбор изображения дерева исходя из кол-ва капель
+           func reloadTree()  {
+            var index = 0
+            let value = Tree.share.userData.drops
+            
+            switch value {
+                case 0...10 :
+                    index = 0
+                case 11...20 :
+                    index = 1
+                case 21...30 :
+                    index = 2
+                case 31...40 :
+                    index = 3
+                case 41...50:
+                    index = 4
+                case 51...INTPTR_MAX:
+                    index = 5
+                
+                default:
+                    index = 0
+            }
+            self.treeImage?.image = self.listTree[index]
+           }
+        
+        // MARK: - Profile
+        
+        //  фунцкции проверяют правильность данных в профиле
+        func checkUsername(){
+            let username = defaults.value(forKey: "Username") as? String ?? " "
+            textUsername?.text = username
+        }
+        
+        func checkStatistics(){
+            textGoodHabits?.text = "\(UserDefaults.standard.integer(forKey:"GoodHabits"))"
+            textBadHabits?.text = "\(UserDefaults.standard.integer(forKey:"BadHabits"))"
+            textDrops?.text = "\(UserDefaults.standard.integer(forKey:"Drops"))"
+        }
+        
+        //  функции изменяют данные в user defaults
+        func changeUserName(name : String){
+            defaults.set(name,forKey: "Username")
+        }
+        func changeGood(number : Int) {
+            defaults.set(number, forKey: "GoodHabits")
+        }
+        func changeBad(number : Int) {
+            defaults.set(number, forKey: "BadHabits")
+        }
+        func changeDrops(number : Int) {
+            defaults.set(number, forKey: "Drops")
+        }
+        
+    //  кнопка сохранения изменения имени пользователя
+        @IBAction func changeUsernameButton(_ sender: Any) {
+            changeUserName(name: (textUsername?.text)!)
+        }
+        
+        
+        
     
 }
 
@@ -252,70 +315,6 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
 //        размер всего экрана = 400 , промежутки = 5*10,
         return CGSize(width: 85, height: 70)
     }
-    
-    
-    
-    // MARK: - Tree
-                                    
-//     выбор изображения дерева исходя из кол-ва капель
-       func reloadTree()  {
-        var index = 0
-        let value = Tree.share.userData.drops
-        
-        switch value {
-            case 0...10 :
-                index = 0
-            case 11...20 :
-                index = 1
-            case 21...30 :
-                index = 2
-            case 31...40 :
-                index = 3
-            case 41...50:
-                index = 4
-            case 51...INTPTR_MAX:
-                index = 5
-            
-            default:
-                index = 0
-        }
-        self.treeImage?.image = self.listTree[index]
-       }
-    
-    // MARK: - Profile
-    
-    //  фунцкции проверяют правильность данных в профиле
-    func checkUsername(){
-        let username = defaults.value(forKey: "Username") as? String ?? " "
-        textUsername?.text = username
-    }
-    
-    func checkStatistics(){
-        textGoodHabits?.text = "\(UserDefaults.standard.integer(forKey:"GoodHabits"))"
-        textBadHabits?.text = "\(UserDefaults.standard.integer(forKey:"BadHabits"))"
-        textDrops?.text = "\(UserDefaults.standard.integer(forKey:"Drops"))"
-    }
-    
-    //  функции изменяют данные в user defaults
-    func changeUserName(name : String){
-        defaults.set(name,forKey: "Username")
-    }
-    func changeGood(number : Int) {
-        defaults.set(number, forKey: "GoodHabits")
-    }
-    func changeBad(number : Int) {
-        defaults.set(number, forKey: "BadHabits")
-    }
-    func changeDrops(number : Int) {
-        defaults.set(number, forKey: "Drops")
-    }
-    
-//  кнопка сохранения изменения имени пользователя
-    @IBAction func changeUsernameButton(_ sender: Any) {
-        changeUserName(name: (textUsername?.text)!)
-    }
-    
-    
     
 }
 
