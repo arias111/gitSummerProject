@@ -3,28 +3,34 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var habbitsTableGood: UICollectionView!
-    @IBOutlet weak var habbitsTableBad: UICollectionView!
+    @IBOutlet weak var habbitsTableGood: UICollectionView?
+    @IBOutlet weak var habbitsTableBad: UICollectionView?
     
     let cellIDGood = "cellIDGood"
     let cellIDBad = "cellIDBad"
     
     let defaults = UserDefaults.standard
     
-    @IBOutlet weak var weatherImage: UIImageView!
-    @IBOutlet weak var weatherDegrees: UILabel!
-    @IBOutlet weak var weatherText: UILabel!
-    @IBOutlet weak var weatherVar: UILabel!
+    @IBOutlet weak var buttonChangeUsername: UIButton!
+    @IBOutlet weak var textUsername: UITextField?
+    @IBOutlet weak var textDrops: UILabel?
+    @IBOutlet weak var textBadHabits: UILabel?
+    @IBOutlet weak var textGoodHabits: UILabel?
     
-    @IBOutlet weak var vredText: UILabel!
-    @IBOutlet weak var vredImage: UIImageView!
+    @IBOutlet weak var weatherImage: UIImageView?
+    @IBOutlet weak var weatherDegrees: UILabel?
+    @IBOutlet weak var weatherText: UILabel?
+    @IBOutlet weak var weatherVar: UILabel?
+    
+    @IBOutlet weak var vredText: UILabel?
+    @IBOutlet weak var vredImage: UIImageView?
     
     let date = Date()
     let calendar = Calendar.current
     var minus = 0
     
-    @IBOutlet weak var drops: UILabel!
-    @IBOutlet weak var treeImage: UIImageView!
+    @IBOutlet weak var drops: UILabel?
+    @IBOutlet weak var treeImage: UIImageView?
     
 //    деревья
     var listTree: [UIImage?] = [
@@ -52,12 +58,17 @@ class ViewController: UIViewController {
     @IBAction func refresh(_ sender: Any) {
         let x = Tree.share.userData.drops
         reloadTree()
-        drops.text = "Капель:\( x )"
+        drops?.text = "Капель:\( x )"
         viewWillAppear(true)
+        changeDrops(number: UserDefaults.standard.integer(forKey:"Drops") + x)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//      проверка данных в профиле и в user defaults
+        checkStatistics()
+        checkUsername()
         
 //        удаляю все данные перед проходом
         defaults.removeObject(forKey: "HabbitArray")
@@ -69,22 +80,22 @@ class ViewController: UIViewController {
         Tree.share.saveData(name: "Rustem", drops: 10, image: "")
         
 //        для таблицы
-        habbitsTableGood.dataSource = self
-        habbitsTableGood.delegate = self
+        habbitsTableGood?.dataSource = self
+        habbitsTableGood?.delegate = self
         
-        habbitsTableBad.dataSource = self
-        habbitsTableBad.delegate = self
+        habbitsTableBad?.dataSource = self
+        habbitsTableBad?.delegate = self
         
 //        если делать через .xib
-        habbitsTableGood.register(UINib(nibName: "HabbitCell", bundle: nil) , forCellWithReuseIdentifier: cellIDGood)
-        habbitsTableBad.register(UINib(nibName: "HabbitCell", bundle: nil) , forCellWithReuseIdentifier: cellIDBad)
+        habbitsTableGood?.register(UINib(nibName: "HabbitCell", bundle: nil) , forCellWithReuseIdentifier: cellIDGood)
+        habbitsTableBad?.register(UINib(nibName: "HabbitCell", bundle: nil) , forCellWithReuseIdentifier: cellIDBad)
         
 //        для погоды календарь
         let day = calendar.component(.day, from: date)
             let hour = calendar.component(.hour, from: date)
             let month = calendar.component(.month, from: date)
             minus = weatherDo(sender:day,hour:hour,month:month);
-            weatherVar.text = String(minus)
+        weatherVar?.text = String(minus)
             minus = minus + vredDo(day:day)
         Tree.share.userData.drops = Tree.share.userData.drops + minus
         
@@ -109,8 +120,8 @@ class ViewController: UIViewController {
 //    для обновления таблицы
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.habbitsTableGood.reloadData()
-        self.habbitsTableBad.reloadData()
+        self.habbitsTableGood?.reloadData()
+        self.habbitsTableBad?.reloadData()
     }
     
     // MARK: - Weather
@@ -119,7 +130,7 @@ class ViewController: UIViewController {
         
 //        какая погода
          let weather = (sender * (31-sender) * (13 - month))%30
-        weatherDegrees.text = String(weather)
+        weatherDegrees?.text = String(weather)
         
 //        короткие дни
          var time:Int
@@ -131,30 +142,30 @@ class ViewController: UIViewController {
         
 //        цвет погоды
         if(hour > time) {
-            weatherImage.image = UIImage(named: "weather-night")
+            weatherImage?.image = UIImage(named: "weather-night")
         } else {
-            weatherImage.image = UIImage(named: "weather-day")
+            weatherImage?.image = UIImage(named: "weather-day")
         }
         
 //        текст погоды
         switch weather {
         case 1...6:
-            weatherText.text = "Холодная погода"
+            weatherText?.text = "Холодная погода"
             return -0
         case 7...9:
-            weatherText.text = "Холодная погода"
+            weatherText?.text = "Холодная погода"
             return -1
         case 10...15:
-            weatherText.text = "Прохладная погода"
+            weatherText?.text = "Прохладная погода"
             return -2
         case 16...21:
-            weatherText.text = "Хорошая погода"
+            weatherText?.text = "Хорошая погода"
             return -3
         case 21...30:
-            weatherText.text = "Жаркая погода"
+            weatherText?.text = "Жаркая погода"
             return -4
         default:
-            weatherText.text = "Холодная погода"
+            weatherText?.text = "Холодная погода"
             return -0;
         }
     }
@@ -175,11 +186,11 @@ class ViewController: UIViewController {
         
 //        текст вредителей
         if(vred == 0){
-            vredText.text = "уже совсем  скоро"
-            vredImage.image = UIImage(named: "noVred")
+            vredText?.text = "уже совсем  скоро"
+            vredImage?.image = UIImage(named: "noVred")
         } else {
-            vredText.text = "начался -2💧"
-            vredImage.image = UIImage(named: "yesVred")
+            vredText?.text = "начался -2💧"
+            vredImage?.image = UIImage(named: "yesVred")
         }
         return vred
     }
@@ -266,8 +277,41 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
             default:
                 index = 0
         }
-           self.treeImage.image = self.listTree[index]
+        self.treeImage?.image = self.listTree[index]
        }
+    
+    // MARK: - Profile
+    
+    //  фунцкции проверяют правильность данных в профиле
+    func checkUsername(){
+        let username = defaults.value(forKey: "Username") as? String ?? " "
+        textUsername?.text = username
+    }
+    
+    func checkStatistics(){
+        textGoodHabits?.text = "\(UserDefaults.standard.integer(forKey:"GoodHabits"))"
+        textBadHabits?.text = "\(UserDefaults.standard.integer(forKey:"BadHabits"))"
+        textDrops?.text = "\(UserDefaults.standard.integer(forKey:"Drops"))"
+    }
+    
+    //  функции изменяют данные в user defaults
+    func changeUserName(name : String){
+        defaults.set(name,forKey: "Username")
+    }
+    func changeGood(number : Int) {
+        defaults.set(number, forKey: "GoodHabits")
+    }
+    func changeBad(number : Int) {
+        defaults.set(number, forKey: "BadHabits")
+    }
+    func changeDrops(number : Int) {
+        defaults.set(number, forKey: "Drops")
+    }
+    
+//  кнопка сохранения изменения имени пользователя
+    @IBAction func changeUsernameButton(_ sender: Any) {
+        changeUserName(name: (textUsername?.text)!)
+    }
     
     
     
