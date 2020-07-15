@@ -81,7 +81,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let theDayToday = calendar.component(.day, from: date)
         
 //        удаляю все данные перед проходом
         defaults.removeObject(forKey: "GoodHabbitArray")
@@ -352,25 +352,28 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let tr =  Tree.share
         let hb = Habbits.share
-        let theDayToday = calendar.component(.day, from: date)
-        
+        var time = String(calendar.component(.day, from: date)) + "." + String(calendar.component(.month, from: date)) + "." + String(calendar.component(.year, from: date))
+        print("time: ",time)
         
                //для хороших привычек обработка одного нажатия в день
         if (collectionView == habbitsTableGood)&&(Habbits.share.GoodHabbitsArray.count != 0) {
-               if hb.GoodHabbitsArray[indexPath.item].date == -1 {
-                   hb.GoodHabbitsArray[indexPath.item].date = calendar.component(.day, from: date)
-               } else if (theDayToday - hb.GoodHabbitsArray[indexPath.item].date > 0) {
-                   hb.GoodHabbitsArray[indexPath.item].date = calendar.component(.day, from: date)
+               if hb.GoodHabbitsArray[indexPath.item].date == "" {
+                    print("okey bro, just do it")
+                   hb.GoodHabbitsArray[indexPath.item].date = time
+               } else if !(hb.GoodHabbitsArray[indexPath.item].date.elementsEqual(time)) {
+                   hb.GoodHabbitsArray[indexPath.item].date = ""
                } else {
+                print("мы попали в последний else")
                    hb.GoodHabbitsArray[indexPath.item].priority -= hb.GoodHabbitsArray[indexPath.item].priority
                }
         } else {
                //для плохих привычек обработка одного нажатия в день
-               if hb.BadHabbitsArray[indexPath.item].date == -1 {
-                   hb.BadHabbitsArray[indexPath.item].date = calendar.component(.day, from: date)
-               } else if (theDayToday - hb.BadHabbitsArray[indexPath.item].date > 0) {
-                   hb.BadHabbitsArray[indexPath.item].date = calendar.component(.day, from: date)
+               if hb.BadHabbitsArray[indexPath.item].date == "" {
+                   hb.BadHabbitsArray[indexPath.item].date = time
+               } else if !(hb.BadHabbitsArray[indexPath.item].date.elementsEqual(time)) {
+                   hb.BadHabbitsArray[indexPath.item].date = ""
                } else {
+                  print("мы попали в последний else")
                    hb.BadHabbitsArray[indexPath.item].priority -= hb.BadHabbitsArray[indexPath.item].priority
                }
         }
