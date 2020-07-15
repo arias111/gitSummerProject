@@ -3,37 +3,37 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var habbitsTableGood: UICollectionView!
-    @IBOutlet weak var habbitsTableBad: UICollectionView!
+    @IBOutlet weak var habbitsTableGood: UICollectionView?
+    @IBOutlet weak var habbitsTableBad: UICollectionView?
     
     let cellIDGood = "cellIDGood"
     let cellIDBad = "cellIDBad"
     
     let defaults = UserDefaults.standard
     
-    @IBOutlet weak var buttonChangeUsername: UIButton!
-    @IBOutlet weak var textUsername: UITextField!
-    @IBOutlet weak var textDrops: UILabel!
-    @IBOutlet weak var textBadHabits: UILabel!
-    @IBOutlet weak var textGoodHabits: UILabel!
+    @IBOutlet weak var buttonChangeUsername: UIButton?
+    @IBOutlet weak var textUsername: UITextField?
+    @IBOutlet weak var textDrops: UILabel?
+    @IBOutlet weak var textBadHabits: UILabel?
+    @IBOutlet weak var textGoodHabits: UILabel?
     
-    @IBOutlet weak var weatherImage: UIImageView!
-    @IBOutlet weak var weatherDegrees: UILabel!
-    @IBOutlet weak var weatherText: UILabel!
-    @IBOutlet weak var weatherVar: UILabel!
+    @IBOutlet weak var weatherImage: UIImageView?
+    @IBOutlet weak var weatherDegrees: UILabel?
+    @IBOutlet weak var weatherText: UILabel?
+    @IBOutlet weak var weatherVar: UILabel?
     
-    @IBOutlet weak var vredText: UILabel!
-    @IBOutlet weak var vredImage: UIImageView!
+    @IBOutlet weak var vredText: UILabel?
+    @IBOutlet weak var vredImage: UIImageView?
     
-    @IBOutlet weak var deleteForImage: UIButton!
+    @IBOutlet weak var deleteForImage: UIButton?
     var del = false
     
     let date = Date()
     let calendar = Calendar.current
     var minus = 0
     
-    @IBOutlet weak var drops: UILabel!
-    @IBOutlet weak var treeImage: UIImageView!
+    @IBOutlet weak var drops: UILabel?
+    @IBOutlet weak var treeImage: UIImageView?
     
 //    деревья
     var listTree: [UIImage?] = [
@@ -60,11 +60,11 @@ class ViewController: UIViewController {
 
     @IBAction func deleteHabbit(_ sender: Any) {
         if del {
-            deleteForImage.setImage(UIImage(named: "deleteOff"), for: .normal)
+            deleteForImage?.setImage(UIImage(named: "deleteOff"), for: .normal)
             del = false
             print(del)
         } else {
-            deleteForImage.setImage(UIImage(named: "deleteOn"), for: .normal)
+            deleteForImage?.setImage(UIImage(named: "deleteOn"), for: .normal)
             del = true
             print(del)
         }
@@ -138,8 +138,8 @@ class ViewController: UIViewController {
 //    для обновления таблицы
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.habbitsTableGood.reloadData()
-        self.habbitsTableBad.reloadData()
+        self.habbitsTableGood?.reloadData()
+        self.habbitsTableBad?.reloadData()
     }
     
     // MARK: - Weather
