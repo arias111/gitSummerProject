@@ -83,4 +83,4 @@ class Habbits{
         BadHabbitsArray.remove(at: index)
     }
     
-}
+    }

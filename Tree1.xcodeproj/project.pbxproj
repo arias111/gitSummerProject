@@ -18,6 +18,7 @@
 		0A61318924B779C50053CFF8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A61318824B779C50053CFF8 /* Assets.xcassets */; };
 		0A61318C24B779C50053CFF8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A61318A24B779C50053CFF8 /* LaunchScreen.storyboard */; };
 		0A61319B24B796F60053CFF8 /* HabbitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A61319924B796F60053CFF8 /* HabbitCell.swift */; };
+		0AB512E424BF0CB10083C3B7 /* Profil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB512E324BF0CB10083C3B7 /* Profil.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		0A61318B24B779C50053CFF8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A61318D24B779C50053CFF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A61319924B796F60053CFF8 /* HabbitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabbitCell.swift; sourceTree = "<group>"; };
+		0AB512E324BF0CB10083C3B7 /* Profil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profil.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 				0A5193B124B91B39002690FC /* Main.storyboard */,
 				0A61318824B779C50053CFF8 /* Assets.xcassets */,
 				0A61318A24B779C50053CFF8 /* LaunchScreen.storyboard */,
+				0AB512E324BF0CB10083C3B7 /* Profil.swift */,
 				0A61318D24B779C50053CFF8 /* Info.plist */,
 			);
 			path = Tree1;
@@ -157,6 +160,7 @@
 				0A5981F224B9F24F0029A2C6 /* Tree.swift in Sources */,
 				0A61318424B779C30053CFF8 /* ViewController.swift in Sources */,
 				0A61319B24B796F60053CFF8 /* HabbitCell.swift in Sources */,
+				0AB512E424BF0CB10083C3B7 /* Profil.swift in Sources */,
 				0A58844B24B861D4006583AD /* NewHabbit.swift in Sources */,
 				0A61318024B779C30053CFF8 /* AppDelegate.swift in Sources */,
 				0A61318224B779C30053CFF8 /* SceneDelegate.swift in Sources */,

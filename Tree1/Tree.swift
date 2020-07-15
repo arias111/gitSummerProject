@@ -32,7 +32,7 @@ class Tree{
             if let data = defaults.value(forKey: "userData") as? Data{
                 return try! PropertyListDecoder().decode(dataU.self, from: data)
             } else {
-                return dataU(name: "", drops: 0, image: "image", goodHabits: 0, badHabits: 0)
+                return dataU(name: "", drops: 0, image: "image",goodHabits: 0, badHabits: 0)
             }
         }
 
@@ -49,7 +49,6 @@ class Tree{
         let dat = dataU(name: name,drops: drops,image: image,goodHabits: goodHabits,badHabits: badHabits)
         userData = dat
     }
-    
     func changeGood(number : Int) {
         Tree.share.saveData(name: Tree.share.userData.name, drops: Tree.share.userData.drops, image: Tree.share.userData.image, goodHabits: Tree.share.userData.goodHabits + number, badHabits: Tree.share.userData.badHabits)
     }
