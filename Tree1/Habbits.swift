@@ -79,8 +79,8 @@ class Habbits{
             Tree.share.changeBad(number: 1)
         }
     
-        func deleteBadHabbit(index: Int){
-            BadHabbitsArray.remove(at: index)
-        }
-    
+    func deleteBadHabbit(index: Int){
+        BadHabbitsArray.remove(at: index)
     }
+    
+}
