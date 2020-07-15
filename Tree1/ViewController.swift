@@ -132,7 +132,7 @@ class ViewController: UIViewController {
         if segue.identifier == "GoToBad" {
         let newVC = segue.destination as! NewHabbit
             newVC.textHab = "НОВАЯ ВРЕДНАЯ ПРИВЫЧКA"
-            newVC.tree = segue.destination as? ViewController
+            newVC.tree = self as? ViewController
         }
     }
     
