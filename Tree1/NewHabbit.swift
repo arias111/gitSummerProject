@@ -15,6 +15,8 @@ class NewHabbit: UIViewController {
     @IBOutlet weak var PriorityHabbit: UISegmentedControl!
     @IBOutlet weak var Erorr: UILabel!
     
+    var tree:ViewController!
+    
     var textHab:String!
 
     override func viewDidLoad() {
@@ -38,7 +40,9 @@ class NewHabbit: UIViewController {
             Habbits.share.saveBadHabbit(name: NameHabbit.text!, priority: (PriorityHabbit.selectedSegmentIndex + 1) * -1, color: "red")
             print("create bad")
         }
-             dismiss(animated: true, completion: nil)
+        tree.refreshAll()
+        dismiss(animated: true, completion: nil)
+
     }
 
 }

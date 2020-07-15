@@ -3,8 +3,8 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var habbitsTableGood: UICollectionView?
-    @IBOutlet weak var habbitsTableBad: UICollectionView?
+    @IBOutlet weak var habbitsTableGood: UICollectionView!
+    @IBOutlet weak var habbitsTableBad: UICollectionView!
     
     let cellIDGood = "cellIDGood"
     let cellIDBad = "cellIDBad"
@@ -12,25 +12,28 @@ class ViewController: UIViewController {
     let defaults = UserDefaults.standard
     
     @IBOutlet weak var buttonChangeUsername: UIButton!
-    @IBOutlet weak var textUsername: UITextField?
-    @IBOutlet weak var textDrops: UILabel?
-    @IBOutlet weak var textBadHabits: UILabel?
-    @IBOutlet weak var textGoodHabits: UILabel?
+    @IBOutlet weak var textUsername: UITextField!
+    @IBOutlet weak var textDrops: UILabel!
+    @IBOutlet weak var textBadHabits: UILabel!
+    @IBOutlet weak var textGoodHabits: UILabel!
     
-    @IBOutlet weak var weatherImage: UIImageView?
-    @IBOutlet weak var weatherDegrees: UILabel?
-    @IBOutlet weak var weatherText: UILabel?
-    @IBOutlet weak var weatherVar: UILabel?
+    @IBOutlet weak var weatherImage: UIImageView!
+    @IBOutlet weak var weatherDegrees: UILabel!
+    @IBOutlet weak var weatherText: UILabel!
+    @IBOutlet weak var weatherVar: UILabel!
     
-    @IBOutlet weak var vredText: UILabel?
-    @IBOutlet weak var vredImage: UIImageView?
+    @IBOutlet weak var vredText: UILabel!
+    @IBOutlet weak var vredImage: UIImageView!
+    
+    @IBOutlet weak var deleteForImage: UIButton!
+    var del = false
     
     let date = Date()
     let calendar = Calendar.current
     var minus = 0
     
-    @IBOutlet weak var drops: UILabel?
-    @IBOutlet weak var treeImage: UIImageView?
+    @IBOutlet weak var drops: UILabel!
+    @IBOutlet weak var treeImage: UIImageView!
     
 //    деревья
     var listTree: [UIImage?] = [
@@ -54,12 +57,17 @@ class ViewController: UIViewController {
         UIImage(named: "8")
     ]
     
-//    обновить
-    @IBAction func refresh(_ sender: Any) {
-        let x = Tree.share.userData.drops
-        reloadTree()
-        drops?.text = "Капель:\( x )"
-        viewWillAppear(true)
+
+    @IBAction func deleteHabbit(_ sender: Any) {
+        if del {
+            deleteForImage?.setImage(UIImage(named: "deleteOff"), for: .normal)
+            del = false
+            print(del)
+        } else {
+            deleteForImage?.setImage(UIImage(named: "deleteOn"), for: .normal)
+            del = true
+            print(del)
+        }
     }
     
     override func viewDidLoad() {
@@ -111,11 +119,20 @@ class ViewController: UIViewController {
         if segue.identifier == "GoToGood" {
         let newVC = segue.destination as! NewHabbit
             newVC.textHab = "НОВАЯ ПОЛЕЗНАЯ ПРИВЫЧКA"
+            newVC.tree = self
         }
         if segue.identifier == "GoToBad" {
         let newVC = segue.destination as! NewHabbit
             newVC.textHab = "НОВАЯ ВРЕДНАЯ ПРИВЫЧКA"
+            newVC.tree = self
         }
+    }
+    
+    func refreshAll(){
+        let x = Tree.share.userData.drops
+        reloadTree()
+        drops?.text = "Каль:\( x )"
+        viewWillAppear(true)
     }
     
 //    для обновления таблицы
@@ -238,13 +255,13 @@ class ViewController: UIViewController {
             textDrops?.text = "\(Tree.share.userData.drops)"
         }
         
+        
     //  кнопка сохранения изменения имени пользователя
         @IBAction func changeUsernameButton(_ sender: Any) {
             Tree.share.saveData(name: (textUsername?.text)!, drops: Tree.share.userData.drops, image: Tree.share.userData.image, goodHabits: Tree.share.userData.goodHabits, badHabits: Tree.share.userData.badHabits)
         }
-        
-        
-        
+    
+    
     
 }
 
@@ -255,18 +272,13 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
 
 //    количество плашек
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("goodArraycount1 \(Habbits.share.GoodHabbitsArray.count)")
-        print("badArraycount1 \(Habbits.share.BadHabbitsArray.count)")
-        
         if(collectionView == habbitsTableGood){
-            print("GoodArraycount\(Habbits.share.GoodHabbitsArray.count)")
             if (Habbits.share.GoodHabbitsArray.count >= 8) {
             return 8;
         } else {
             return Habbits.share.GoodHabbitsArray.count
         }
         } else{
-            print("badArraycount\(Habbits.share.BadHabbitsArray.count)")
             if (Habbits.share.BadHabbitsArray.count >= 8) {
                 return 8;
             } else {
@@ -283,7 +295,6 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
         cell.color.backgroundColor = UIColor(patternImage: listColoursCell[indexPath.item]!)
         cell.index = indexPath.item
         cell.piority = Habbits.share.GoodHabbitsArray[indexPath.item].priority
-            print("good")
         return cell
         } else {
                     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIDBad, for: indexPath) as! HabbitCell
@@ -301,5 +312,27 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
         return CGSize(width: 85, height: 70)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let tr =  Tree.share
+        let hb = Habbits.share
+        
+        if del {
+            if (collectionView == habbitsTableGood)&&(Habbits.share.GoodHabbitsArray.count != 0) {
+                hb.deleteGoodHabbit(index: indexPath.item)
+                refreshAll()
+            } else {
+                hb.deleteBadHabbit(index: indexPath.item)
+                refreshAll()
+            }
+        }else {
+        if (collectionView == habbitsTableGood)&&(Habbits.share.GoodHabbitsArray.count != 0) {
+            tr.saveData(name: tr.userData.name, drops: tr.userData.drops + hb.GoodHabbitsArray[indexPath.item].priority, image: "", goodHabits: tr.userData.goodHabits, badHabits: tr.userData.badHabits)
+            refreshAll()
+        } else {
+            tr.saveData(name: tr.userData.name, drops: tr.userData.drops + hb.BadHabbitsArray[indexPath.item].priority, image: "", goodHabits: tr.userData.goodHabits, badHabits: tr.userData.badHabits)
+            refreshAll()
+        }
+            }
+    }
 }
 
