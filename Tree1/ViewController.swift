@@ -32,6 +32,9 @@ class ViewController: UIViewController {
     let calendar = Calendar.current
     var minus = 0
     
+    @IBOutlet weak var upDay: UILabel!
+    @IBOutlet weak var downDay: UILabel!
+    
     @IBOutlet weak var drops: UILabel!
     @IBOutlet weak var treeImage: UIImageView!
     
@@ -97,16 +100,35 @@ class ViewController: UIViewController {
         habbitsTableBad?.register(UINib(nibName: "HabbitCell", bundle: nil) , forCellWithReuseIdentifier: cellIDBad)
         
 //        для погоды календарь
-        let day = calendar.component(.day, from: date)
+            let day = calendar.component(.day, from: date)
             let hour = calendar.component(.hour, from: date)
             let month = calendar.component(.month, from: date)
-            minus = weatherDo(sender:day,hour:hour,month:month);
-        weatherVar?.text = String(minus)
+        
+//        чтобы погода вычитала каждый день
+        if defaults.value(forKey: "WeatherDay") == nil {
+            defaults.set(32,forKey: "WeatherDay")
+        }
+        
+        let weatherday = defaults.value(forKey: "WeatherDay") as! Int
+        
+        if (weatherday != calendar.component(.day, from: date)){
+            minus = weatherDo(sender:day,hour:hour,month:month)
+            weatherVar?.text = String(minus)
             minus = minus + vredDo(day:day)
-        Tree.share.userData.drops = Tree.share.userData.drops + minus
+            Tree.share.userData.drops = Tree.share.userData.drops + minus
+        }
         
-        drops?.text = "Каль:\( Tree.share.userData.drops )"
+        if defaults.value(forKey: "ArrowDay") == nil {
+                  defaults.set(32,forKey: "ArrowDay")
+        }
         
+              let arrowday = defaults.value(forKey: "ArrowDay") as! Int
+              if (arrowday != calendar.component(.day, from: date)){
+                defaults.set(0,forKey: "upDay")
+                defaults.set(0,forKey: "downDay")
+                }
+        
+        refreshAll()
 //        вызов дерева
         reloadTree()
     }
@@ -131,6 +153,10 @@ class ViewController: UIViewController {
         let x = Tree.share.userData.drops
         reloadTree()
         drops?.text = "Каль:\( x )"
+        let up = defaults.value(forKey: "upDay") as! Int
+        let down = defaults.value(forKey: "downDay") as! Int
+        upDay.text = String(up)
+        downDay.text = String(down)
         viewWillAppear(true)
     }
     
@@ -305,10 +331,17 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
         }else {
         if (collectionView == habbitsTableGood)&&(Habbits.share.GoodHabbitsArray.count != 0) {
             tr.saveData(name: tr.userData.name, drops: tr.userData.drops + hb.GoodHabbitsArray[indexPath.item].priority, image: "",goodHabits: tr.userData.goodHabits, badHabits: tr.userData.badHabits)
+            var up = defaults.value(forKey: "upDay") as! Int
+            up = up + hb.GoodHabbitsArray[indexPath.item].priority
+            defaults.set(up,forKey: "upDay")
+            
             refreshAll()
         } else {
             tr.saveData(name: tr.userData.name, drops: tr.userData.drops + hb.BadHabbitsArray[indexPath.item].priority, image: "", goodHabits: tr.userData.goodHabits, badHabits: tr.userData.badHabits)
             refreshAll()
+            var down = defaults.value(forKey: "downDay") as! Int
+            down = down + hb.BadHabbitsArray[indexPath.item].priority
+            defaults.set(down,forKey: "downDay")
         }
             }
     }
