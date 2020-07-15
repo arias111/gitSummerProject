@@ -45,7 +45,13 @@ class ViewController: UIViewController {
         UIImage(named: "tree#3"),
         UIImage(named: "tree#4"),
         UIImage(named: "tree#5"),
-        UIImage(named: "tree#6")
+        UIImage(named: "tree#6"),
+        UIImage(named: "tree#7"),
+        UIImage(named: "tree#8"),
+        UIImage(named: "tree#9"),
+        UIImage(named: "tree#10"),
+        UIImage(named: "tree#11"),
+        UIImage(named: "tree#12")
     ]
     
 //     цвета ячеек
@@ -86,7 +92,7 @@ class ViewController: UIViewController {
         defaults.synchronize()
         
 //        задаю данные пользователя
-        Tree.share.saveData(name: "Rustem", drops: 10, image: "", goodHabits: 0, badHabits: 0)
+        Tree.share.saveData(name: "Rustem", drops: 20, image: "", goodHabits: 0, badHabits: 0)
         
 //        для таблицы
         habbitsTableGood?.dataSource = self
@@ -246,6 +252,13 @@ class ViewController: UIViewController {
             var index = 0
             let value = Tree.share.userData.drops
             
+            let up = defaults.value(forKey: "upDay") as! Int
+            let down = defaults.value(forKey: "downDay") as! Int
+            
+            if(up > down) {
+                print("norm")
+                print(up)
+                print(down)
             switch value {
                 case 0...10 :
                     index = 0
@@ -263,6 +276,26 @@ class ViewController: UIViewController {
                 default:
                     index = 0
             }
+            } else {
+                print("ploho")
+                switch value {
+                    case 0...10 :
+                        index = 6
+                    case 11...20 :
+                        index = 7
+                    case 21...30 :
+                        index = 8
+                    case 31...40 :
+                        index = 9
+                    case 41...50:
+                        index = 10
+                    case 51...INTPTR_MAX:
+                        index = 11
+                    default:
+                        index = 6
+                }
+            }
+            
             self.treeImage?.image = self.listTree[index]
            }
         
@@ -334,14 +367,13 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
             var up = defaults.value(forKey: "upDay") as! Int
             up = up + hb.GoodHabbitsArray[indexPath.item].priority
             defaults.set(up,forKey: "upDay")
-            
             refreshAll()
         } else {
             tr.saveData(name: tr.userData.name, drops: tr.userData.drops + hb.BadHabbitsArray[indexPath.item].priority, image: "", goodHabits: tr.userData.goodHabits, badHabits: tr.userData.badHabits)
-            refreshAll()
             var down = defaults.value(forKey: "downDay") as! Int
-            down = down + hb.BadHabbitsArray[indexPath.item].priority
+            down = down - hb.BadHabbitsArray[indexPath.item].priority
             defaults.set(down,forKey: "downDay")
+            refreshAll()
         }
             }
     }
