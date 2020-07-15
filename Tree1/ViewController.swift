@@ -73,7 +73,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//      проверка данных в профиле и в user defaults
+//      проверка данных в профиле
         checkStatistics()
         checkUsername()
         
