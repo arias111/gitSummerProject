@@ -60,19 +60,11 @@ class ViewController: UIViewController {
 
     @IBAction func deleteHabbit(_ sender: Any) {
         if del {
-<<<<<<< HEAD
-            deleteForImage?.setImage(UIImage(named: "deleteOff"), for: .normal)
-            del = false
-            print(del)
-        } else {
-            deleteForImage?.setImage(UIImage(named: "deleteOn"), for: .normal)
-=======
             deleteForImage.setImage(UIImage(named: "deleteOff"), for: .normal)
             del = false
             print(del)
         } else {
             deleteForImage.setImage(UIImage(named: "deleteOn"), for: .normal)
->>>>>>> 8d6af6c51c9c13251cf84eea08f675a75738cd24
             del = true
             print(del)
         }
@@ -81,9 +73,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//      проверка данных в профиле и в user defaults
-        checkStatistics()
-        checkUsername()
         
 //        удаляю все данные перед проходом
         defaults.removeObject(forKey: "GoodHabbitArray")
@@ -116,6 +105,8 @@ class ViewController: UIViewController {
             minus = minus + vredDo(day:day)
         Tree.share.userData.drops = Tree.share.userData.drops + minus
         
+        drops?.text = "Каль:\( Tree.share.userData.drops )"
+        
 //        вызов дерева
         reloadTree()
     }
@@ -141,10 +132,6 @@ class ViewController: UIViewController {
         reloadTree()
         drops?.text = "Каль:\( x )"
         viewWillAppear(true)
-<<<<<<< HEAD
-=======
-        changeDrops(number: UserDefaults.standard.integer(forKey:"Drops") + x)
->>>>>>> 8d6af6c51c9c13251cf84eea08f675a75738cd24
     }
     
 //    для обновления таблицы
@@ -253,56 +240,6 @@ class ViewController: UIViewController {
             self.treeImage?.image = self.listTree[index]
            }
         
-        // MARK: - Profile
-        
-        //  фунцкции проверяют правильность данных в профиле
-        func checkUsername(){
-<<<<<<< HEAD
-            let username = Tree.share.userData.name
-=======
-            let username = defaults.value(forKey: "Username") as? String ?? " "
->>>>>>> 8d6af6c51c9c13251cf84eea08f675a75738cd24
-            textUsername?.text = username
-        }
-        
-        func checkStatistics(){
-<<<<<<< HEAD
-            textGoodHabits?.text = "\(Tree.share.userData.goodHabits))"
-            textBadHabits?.text = "\(Tree.share.userData.badHabits))"
-            textDrops?.text = "\(Tree.share.userData.drops)"
-        }
-        
-        
-    //  кнопка сохранения изменения имени пользователя
-        @IBAction func changeUsernameButton(_ sender: Any) {
-            Tree.share.saveData(name: (textUsername?.text)!, drops: Tree.share.userData.drops, image: Tree.share.userData.image, goodHabits: Tree.share.userData.goodHabits, badHabits: Tree.share.userData.badHabits)
-=======
-            textGoodHabits?.text = "\(UserDefaults.standard.integer(forKey:"GoodHabits"))"
-            textBadHabits?.text = "\(UserDefaults.standard.integer(forKey:"BadHabits"))"
-            textDrops?.text = "\(UserDefaults.standard.integer(forKey:"Drops"))"
-        }
-        
-        //  функции изменяют данные в user defaults
-        func changeUserName(name : String){
-            defaults.set(name,forKey: "Username")
-        }
-        func changeGood(number : Int) {
-            defaults.set(number, forKey: "GoodHabits")
-        }
-        func changeBad(number : Int) {
-            defaults.set(number, forKey: "BadHabits")
-        }
-        func changeDrops(number : Int) {
-            defaults.set(number, forKey: "Drops")
-        }
-        
-    //  кнопка сохранения изменения имени пользователя
-        @IBAction func changeUsernameButton(_ sender: Any) {
-            changeUserName(name: (textUsername?.text)!)
->>>>>>> 8d6af6c51c9c13251cf84eea08f675a75738cd24
-        }
-    
-    
     
 }
 
@@ -367,17 +304,10 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
             }
         }else {
         if (collectionView == habbitsTableGood)&&(Habbits.share.GoodHabbitsArray.count != 0) {
-<<<<<<< HEAD
-            tr.saveData(name: tr.userData.name, drops: tr.userData.drops + hb.GoodHabbitsArray[indexPath.item].priority, image: "", goodHabits: tr.userData.goodHabits, badHabits: tr.userData.badHabits)
+            tr.saveData(name: tr.userData.name, drops: tr.userData.drops + hb.GoodHabbitsArray[indexPath.item].priority, image: "",goodHabits: tr.userData.goodHabits, badHabits: tr.userData.badHabits)
             refreshAll()
         } else {
             tr.saveData(name: tr.userData.name, drops: tr.userData.drops + hb.BadHabbitsArray[indexPath.item].priority, image: "", goodHabits: tr.userData.goodHabits, badHabits: tr.userData.badHabits)
-=======
-            tr.saveData(name: tr.userData.name, drops: tr.userData.drops + hb.GoodHabbitsArray[indexPath.item].priority, image: "")
-            refreshAll()
-        } else {
-            tr.saveData(name: tr.userData.name, drops: tr.userData.drops + hb.BadHabbitsArray[indexPath.item].priority, image: "")
->>>>>>> 8d6af6c51c9c13251cf84eea08f675a75738cd24
             refreshAll()
         }
             }
