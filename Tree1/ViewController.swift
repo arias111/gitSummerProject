@@ -57,22 +57,14 @@ class ViewController: UIViewController {
         UIImage(named: "8")
     ]
     
-//    обновить
-    @IBAction func refresh(_ sender: Any) {
-        let x = Tree.share.userData.drops
-        reloadTree()
-        drops?.text = "Капель:\( x )"
-        viewWillAppear(true)
-        changeDrops(number: UserDefaults.standard.integer(forKey:"Drops") + x)
-    }
-    
+
     @IBAction func deleteHabbit(_ sender: Any) {
         if del {
-            deleteForImage.imageView?.image = UIImage(named: "deleteOff")
+            deleteForImage.setImage(UIImage(named: "deleteOff"), for: .normal)
             del = false
             print(del)
         } else {
-            deleteForImage.imageView?.image = UIImage(named: "deleteOn")
+            deleteForImage.setImage(UIImage(named: "deleteOn"), for: .normal)
             del = true
             print(del)
         }
@@ -127,12 +119,12 @@ class ViewController: UIViewController {
         if segue.identifier == "GoToGood" {
         let newVC = segue.destination as! NewHabbit
             newVC.textHab = "НОВАЯ ПОЛЕЗНАЯ ПРИВЫЧКA"
-            newVC.tree = self as? ViewController
+            newVC.tree = self
         }
         if segue.identifier == "GoToBad" {
         let newVC = segue.destination as! NewHabbit
             newVC.textHab = "НОВАЯ ВРЕДНАЯ ПРИВЫЧКA"
-            newVC.tree = self as? ViewController
+            newVC.tree = self
         }
     }
     
@@ -334,6 +326,27 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
         return CGSize(width: 85, height: 70)
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let tr =  Tree.share
+        let hb = Habbits.share
+        
+        if del {
+            if (collectionView == habbitsTableGood)&&(Habbits.share.GoodHabbitsArray.count != 0) {
+                hb.deleteGoodHabbit(index: indexPath.item)
+                refreshAll()
+            } else {
+                hb.deleteBadHabbit(index: indexPath.item)
+                refreshAll()
+            }
+        }else {
+        if (collectionView == habbitsTableGood)&&(Habbits.share.GoodHabbitsArray.count != 0) {
+            tr.saveData(name: tr.userData.name, drops: tr.userData.drops + hb.GoodHabbitsArray[indexPath.item].priority, image: "")
+            refreshAll()
+        } else {
+            tr.saveData(name: tr.userData.name, drops: tr.userData.drops + hb.BadHabbitsArray[indexPath.item].priority, image: "")
+            refreshAll()
+        }
+            }
+    }
 }
 

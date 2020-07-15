@@ -46,6 +46,10 @@ class Habbits{
         GoodHabbitsArray.insert(habbit, at: 0)
     }
     
+    func deleteGoodHabbit(index: Int){
+        GoodHabbitsArray.remove(at: index)
+    }
+    
     
     
     
@@ -72,4 +76,9 @@ class Habbits{
             let habbit = Habbit(name: name,priority: priority,color: color)
             BadHabbitsArray.insert(habbit, at: 0)
         }
-}
+    
+    func deleteBadHabbit(index: Int){
+        BadHabbitsArray.remove(at: index)
+    }
+    
+    }
