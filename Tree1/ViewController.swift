@@ -86,7 +86,7 @@ class ViewController: UIViewController {
         defaults.synchronize()
         
 //        задаю данные пользователя
-        Tree.share.saveData(name: "Rustem", drops: 10, image: "")
+        Tree.share.saveData(name: "Rustem", drops: 10, image: "", goodHabits: 0, badHabits: 0)
         
 //        для таблицы
         habbitsTableGood?.dataSource = self
@@ -133,7 +133,6 @@ class ViewController: UIViewController {
         reloadTree()
         drops?.text = "Каль:\( x )"
         viewWillAppear(true)
-        changeDrops(number: UserDefaults.standard.integer(forKey:"Drops") + x)
     }
     
 //    для обновления таблицы
@@ -246,33 +245,20 @@ class ViewController: UIViewController {
         
         //  фунцкции проверяют правильность данных в профиле
         func checkUsername(){
-            let username = defaults.value(forKey: "Username") as? String ?? " "
+           let username = Tree.share.userData.name
             textUsername?.text = username
         }
         
         func checkStatistics(){
-            textGoodHabits?.text = "\(UserDefaults.standard.integer(forKey:"GoodHabits"))"
-            textBadHabits?.text = "\(UserDefaults.standard.integer(forKey:"BadHabits"))"
-            textDrops?.text = "\(UserDefaults.standard.integer(forKey:"Drops"))"
+            textGoodHabits?.text = "\(Tree.share.userData.goodHabits))"
+            textBadHabits?.text = "\(Tree.share.userData.badHabits))"
+            textDrops?.text = "\(Tree.share.userData.drops)"
         }
         
-        //  функции изменяют данные в user defaults
-        func changeUserName(name : String){
-            defaults.set(name,forKey: "Username")
-        }
-        func changeGood(number : Int) {
-            defaults.set(number, forKey: "GoodHabits")
-        }
-        func changeBad(number : Int) {
-            defaults.set(number, forKey: "BadHabits")
-        }
-        func changeDrops(number : Int) {
-            defaults.set(number, forKey: "Drops")
-        }
         
     //  кнопка сохранения изменения имени пользователя
         @IBAction func changeUsernameButton(_ sender: Any) {
-            changeUserName(name: (textUsername?.text)!)
+            Tree.share.saveData(name: (textUsername?.text)!, drops: Tree.share.userData.drops, image: Tree.share.userData.image, goodHabits: Tree.share.userData.goodHabits, badHabits: Tree.share.userData.badHabits)
         }
     
     
@@ -340,10 +326,10 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
             }
         }else {
         if (collectionView == habbitsTableGood)&&(Habbits.share.GoodHabbitsArray.count != 0) {
-            tr.saveData(name: tr.userData.name, drops: tr.userData.drops + hb.GoodHabbitsArray[indexPath.item].priority, image: "")
+            tr.saveData(name: tr.userData.name, drops: tr.userData.drops + hb.GoodHabbitsArray[indexPath.item].priority, image: "",goodHabits: tr.userData.goodHabits, badHabits: tr.userData.badHabits)
             refreshAll()
         } else {
-            tr.saveData(name: tr.userData.name, drops: tr.userData.drops + hb.BadHabbitsArray[indexPath.item].priority, image: "")
+            tr.saveData(name: tr.userData.name, drops: tr.userData.drops + hb.BadHabbitsArray[indexPath.item].priority, image: "", goodHabits: tr.userData.goodHabits, badHabits: tr.userData.badHabits)
             refreshAll()
         }
             }
