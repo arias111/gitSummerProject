@@ -243,7 +243,7 @@ class ViewController: UIViewController {
         
         // MARK: - Profile
         
-        //  фунцкции проверяют правильность данных в профиле
+//     фунцкции проверяют правильность данных в профиле
         func checkUsername(){
            let username = Tree.share.userData.name
             textUsername?.text = username
@@ -256,7 +256,7 @@ class ViewController: UIViewController {
         }
         
         
-    //  кнопка сохранения изменения имени пользователя
+//      кнопка сохранения изменения имени пользователя
         @IBAction func changeUsernameButton(_ sender: Any) {
             Tree.share.saveData(name: (textUsername?.text)!, drops: Tree.share.userData.drops, image: Tree.share.userData.image, goodHabits: Tree.share.userData.goodHabits, badHabits: Tree.share.userData.badHabits)
         }
