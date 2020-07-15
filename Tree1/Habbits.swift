@@ -19,6 +19,7 @@ class Habbits{
         var name:String
         var priority:Int
         var color:String
+        var date: Int
     }
     
     
@@ -41,9 +42,9 @@ class Habbits{
 
     }
 //    добавление хороших привычек в массив
-    func saveGoodHabbit(name:String, priority:Int, color:String){
-        let habbit = Habbit(name: name,priority: priority,color: color)
-        GoodHabbitsArray.insert(habbit, at: 0)
+    func saveGoodHabbit(name:String, priority:Int, color:String, date: Int){
+        let habbit = Habbit(name: name,priority: priority,color: color, date: date)
+        GoodHabbitsArray.append(habbit)
         Tree.share.changeGood(number: 1)
     }
     
@@ -73,9 +74,9 @@ class Habbits{
         }
         
     //    добавление плохих привычки в массив
-        func saveBadHabbit(name:String, priority:Int, color:String){
-            let habbit = Habbit(name: name,priority: priority,color: color)
-            BadHabbitsArray.insert(habbit, at: 0)
+    func saveBadHabbit(name:String, priority:Int, color:String, date: Int){
+            let habbit = Habbit(name: name,priority: priority,color: color, date: date)
+            BadHabbitsArray.append(habbit)
             Tree.share.changeBad(number: 1)
         }
     

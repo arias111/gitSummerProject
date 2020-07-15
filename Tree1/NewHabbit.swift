@@ -33,11 +33,11 @@ class NewHabbit: UIViewController {
             return
         }
         if GoodOrBad.text == "НОВАЯ ПОЛЕЗНАЯ ПРИВЫЧКA"{
-            Habbits.share.saveGoodHabbit(name: NameHabbit.text!, priority: PriorityHabbit.selectedSegmentIndex + 1, color: "red")
+            Habbits.share.saveGoodHabbit(name: NameHabbit.text!, priority: PriorityHabbit.selectedSegmentIndex + 1, color: "red", date: -1)
             print("create good")
         }
         if GoodOrBad.text == "НОВАЯ ВРЕДНАЯ ПРИВЫЧКA"{
-            Habbits.share.saveBadHabbit(name: NameHabbit.text!, priority: (PriorityHabbit.selectedSegmentIndex + 1) * -1, color: "red")
+            Habbits.share.saveBadHabbit(name: NameHabbit.text!, priority: (PriorityHabbit.selectedSegmentIndex + 1) * -1, color: "red", date: -1)
             print("create bad")
         }
         tree.refreshAll()

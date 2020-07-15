@@ -352,6 +352,29 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let tr =  Tree.share
         let hb = Habbits.share
+        let theDayToday = calendar.component(.day, from: date)
+        
+        
+               //для хороших привычек обработка одного нажатия в день
+        if (collectionView == habbitsTableGood)&&(Habbits.share.GoodHabbitsArray.count != 0) {
+               if hb.GoodHabbitsArray[indexPath.item].date == -1 {
+                   hb.GoodHabbitsArray[indexPath.item].date = calendar.component(.day, from: date)
+               } else if (theDayToday - hb.GoodHabbitsArray[indexPath.item].date > 0) {
+                   hb.GoodHabbitsArray[indexPath.item].date = calendar.component(.day, from: date)
+               } else {
+                   hb.GoodHabbitsArray[indexPath.item].priority -= hb.GoodHabbitsArray[indexPath.item].priority
+               }
+        } else {
+               //для плохих привычек обработка одного нажатия в день
+               if hb.BadHabbitsArray[indexPath.item].date == -1 {
+                   hb.BadHabbitsArray[indexPath.item].date = calendar.component(.day, from: date)
+               } else if (theDayToday - hb.BadHabbitsArray[indexPath.item].date > 0) {
+                   hb.BadHabbitsArray[indexPath.item].date = calendar.component(.day, from: date)
+               } else {
+                   hb.BadHabbitsArray[indexPath.item].priority -= hb.BadHabbitsArray[indexPath.item].priority
+               }
+        }
+        
         
         if del {
             if (collectionView == habbitsTableGood)&&(Habbits.share.GoodHabbitsArray.count != 0) {
@@ -361,7 +384,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
                 hb.deleteBadHabbit(index: indexPath.item)
                 refreshAll()
             }
-        }else {
+        } else {
         if (collectionView == habbitsTableGood)&&(Habbits.share.GoodHabbitsArray.count != 0) {
             tr.saveData(name: tr.userData.name, drops: tr.userData.drops + hb.GoodHabbitsArray[indexPath.item].priority, image: "",goodHabits: tr.userData.goodHabits, badHabits: tr.userData.badHabits)
             var up = defaults.value(forKey: "upDay") as! Int
