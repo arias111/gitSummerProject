@@ -55,7 +55,4 @@ class Tree{
     func changeBad(number : Int) {
         Tree.share.saveData(name: Tree.share.userData.name, drops: Tree.share.userData.drops, image: Tree.share.userData.image, goodHabits: Tree.share.userData.goodHabits, badHabits: Tree.share.userData.badHabits + number)
     }
-    func changeDrops(number : Int) {
-        Tree.share.saveData(name: Tree.share.userData.name, drops: Tree.share.userData.drops + number, image: Tree.share.userData.image, goodHabits: Tree.share.userData.goodHabits, badHabits: Tree.share.userData.badHabits)
-    }
 }
