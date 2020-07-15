@@ -3,8 +3,8 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var habbitsTableGood: UICollectionView?
-    @IBOutlet weak var habbitsTableBad: UICollectionView?
+    @IBOutlet weak var habbitsTableGood: UICollectionView!
+    @IBOutlet weak var habbitsTableBad: UICollectionView!
     
     let cellIDGood = "cellIDGood"
     let cellIDBad = "cellIDBad"
@@ -12,25 +12,28 @@ class ViewController: UIViewController {
     let defaults = UserDefaults.standard
     
     @IBOutlet weak var buttonChangeUsername: UIButton!
-    @IBOutlet weak var textUsername: UITextField?
-    @IBOutlet weak var textDrops: UILabel?
-    @IBOutlet weak var textBadHabits: UILabel?
-    @IBOutlet weak var textGoodHabits: UILabel?
+    @IBOutlet weak var textUsername: UITextField!
+    @IBOutlet weak var textDrops: UILabel!
+    @IBOutlet weak var textBadHabits: UILabel!
+    @IBOutlet weak var textGoodHabits: UILabel!
     
-    @IBOutlet weak var weatherImage: UIImageView?
-    @IBOutlet weak var weatherDegrees: UILabel?
-    @IBOutlet weak var weatherText: UILabel?
-    @IBOutlet weak var weatherVar: UILabel?
+    @IBOutlet weak var weatherImage: UIImageView!
+    @IBOutlet weak var weatherDegrees: UILabel!
+    @IBOutlet weak var weatherText: UILabel!
+    @IBOutlet weak var weatherVar: UILabel!
     
-    @IBOutlet weak var vredText: UILabel?
-    @IBOutlet weak var vredImage: UIImageView?
+    @IBOutlet weak var vredText: UILabel!
+    @IBOutlet weak var vredImage: UIImageView!
+    
+    @IBOutlet weak var deleteForImage: UIButton!
+    var del = false
     
     let date = Date()
     let calendar = Calendar.current
     var minus = 0
     
-    @IBOutlet weak var drops: UILabel?
-    @IBOutlet weak var treeImage: UIImageView?
+    @IBOutlet weak var drops: UILabel!
+    @IBOutlet weak var treeImage: UIImageView!
     
 //    деревья
     var listTree: [UIImage?] = [
@@ -61,6 +64,18 @@ class ViewController: UIViewController {
         drops?.text = "Капель:\( x )"
         viewWillAppear(true)
         changeDrops(number: UserDefaults.standard.integer(forKey:"Drops") + x)
+    }
+    
+    @IBAction func deleteHabbit(_ sender: Any) {
+        if del {
+            deleteForImage.imageView?.image = UIImage(named: "deleteOff")
+            del = false
+            print(del)
+        } else {
+            deleteForImage.imageView?.image = UIImage(named: "deleteOn")
+            del = true
+            print(del)
+        }
     }
     
     override func viewDidLoad() {
@@ -112,18 +127,28 @@ class ViewController: UIViewController {
         if segue.identifier == "GoToGood" {
         let newVC = segue.destination as! NewHabbit
             newVC.textHab = "НОВАЯ ПОЛЕЗНАЯ ПРИВЫЧКA"
+            newVC.tree = self as? ViewController
         }
         if segue.identifier == "GoToBad" {
         let newVC = segue.destination as! NewHabbit
             newVC.textHab = "НОВАЯ ВРЕДНАЯ ПРИВЫЧКA"
+            newVC.tree = segue.destination as? ViewController
         }
+    }
+    
+    func refreshAll(){
+        let x = Tree.share.userData.drops
+        reloadTree()
+        drops?.text = "Каль:\( x )"
+        viewWillAppear(true)
+        changeDrops(number: UserDefaults.standard.integer(forKey:"Drops") + x)
     }
     
 //    для обновления таблицы
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.habbitsTableGood?.reloadData()
-        self.habbitsTableBad?.reloadData()
+        self.habbitsTableGood.reloadData()
+        self.habbitsTableBad.reloadData()
     }
     
     // MARK: - Weather
@@ -257,9 +282,8 @@ class ViewController: UIViewController {
         @IBAction func changeUsernameButton(_ sender: Any) {
             changeUserName(name: (textUsername?.text)!)
         }
-        
-        
-        
+    
+    
     
 }
 
@@ -270,18 +294,13 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
 
 //    количество плашек
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("goodArraycount1 \(Habbits.share.GoodHabbitsArray.count)")
-        print("badArraycount1 \(Habbits.share.BadHabbitsArray.count)")
-        
         if(collectionView == habbitsTableGood){
-            print("GoodArraycount\(Habbits.share.GoodHabbitsArray.count)")
             if (Habbits.share.GoodHabbitsArray.count >= 8) {
             return 8;
         } else {
             return Habbits.share.GoodHabbitsArray.count
         }
         } else{
-            print("badArraycount\(Habbits.share.BadHabbitsArray.count)")
             if (Habbits.share.BadHabbitsArray.count >= 8) {
                 return 8;
             } else {
@@ -298,7 +317,6 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
         cell.color.backgroundColor = UIColor(patternImage: listColoursCell[indexPath.item]!)
         cell.index = indexPath.item
         cell.piority = Habbits.share.GoodHabbitsArray[indexPath.item].priority
-            print("good")
         return cell
         } else {
                     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIDBad, for: indexPath) as! HabbitCell
@@ -315,6 +333,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
 //        размер всего экрана = 400 , промежутки = 5*10,
         return CGSize(width: 85, height: 70)
     }
+    
     
 }
 

@@ -25,6 +25,9 @@ class HabbitCell: UICollectionViewCell {
     }
     
     @IBAction func doSettings(_ sender: Any) {
+        print("set")
+        
+        
     }
     override func awakeFromNib() {
         super.awakeFromNib()

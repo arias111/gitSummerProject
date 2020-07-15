@@ -263,6 +263,14 @@
                                             <segue destination="PPu-fA-33l" kind="show" id="hbQ-YS-0fc"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HW5-Ij-DOH">
+                                        <rect key="frame" x="381" y="365" width="24" height="24"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="deleteOff"/>
+                                        <connections>
+                                            <action selector="deleteHabbit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YBK-HZ-Wz2"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </view>
                         </subviews>
@@ -270,6 +278,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="deleteForImage" destination="HW5-Ij-DOH" id="Y7S-gV-2xE"/>
                         <outlet property="drops" destination="C55-N2-fJv" id="soE-dq-KQQ"/>
                         <outlet property="habbitsTableBad" destination="7gM-oJ-2yL" id="e5f-K9-Mhk"/>
                         <outlet property="habbitsTableGood" destination="pj2-WJ-h00" id="1XG-s6-tcy"/>
@@ -457,12 +466,13 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="zvk-s6-13P"/>
+        <segue reference="krs-3K-KlV"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Image" width="32" height="32"/>
         <image name="avatar" width="1694" height="1372"/>
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>
+        <image name="deleteOff" width="400" height="400"/>
         <image name="noVred" width="476" height="473"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="profile-bis" width="553" height="587"/>
