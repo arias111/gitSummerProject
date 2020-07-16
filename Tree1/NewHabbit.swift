@@ -32,11 +32,20 @@ class NewHabbit: UIViewController {
             Erorr.text = "Назовите привычку!"
             return
         }
+        //f
         if GoodOrBad.text == "НОВАЯ ПОЛЕЗНАЯ ПРИВЫЧКA"{
+            if (Habbits.share.GoodHabbitsArray.count >= 8){
+                  Erorr.text = "Максимальное кол-во!"
+                          return
+            }
             Habbits.share.saveGoodHabbit(name: NameHabbit.text!, priority: PriorityHabbit.selectedSegmentIndex + 1, color: "red", date: "")
             print("create good")
         }
         if GoodOrBad.text == "НОВАЯ ВРЕДНАЯ ПРИВЫЧКA"{
+            if (Habbits.share.BadHabbitsArray.count >= 8){
+                  Erorr.text = "Слишком много вредных привычек!"
+                          return
+            }
             Habbits.share.saveBadHabbit(name: NameHabbit.text!, priority: (PriorityHabbit.selectedSegmentIndex + 1) * -1, color: "red", date: "")
             print("create bad")
         }
