@@ -288,14 +288,12 @@ class ViewController: UIViewController {
                 }
             }
             if defaults.value(forKey: "indexTree") == nil {
-                defaults.set(index, forKey: "indexTree")
+                defaults.set(0, forKey: "indexTree")
             }
                 
             let index1 = defaults.value(forKey: "indexTree") as! Int
-            defaults.set(index, forKey: "indexTree")
             
-            if index > index1 {
-                print("Поздравляю")
+            if (index > index1)&&(index < 6)&&(index1 < 6) {
                 let alert = UIAlertController(title: "Поздравляем", message: "\(Tree.share.userData.name), вы достигли нового уровня!", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                       switch action.style{
@@ -310,8 +308,7 @@ class ViewController: UIViewController {
                 }}))
                 self.present(alert, animated: true, completion: nil)
             }
-            if index < index1 {
-                print("Не поздровляю")
+            if (index < index1)&&(index < 6)&&(index1 < 6) {
                 let alert = UIAlertController(title: "Старайтесь!", message: "\(Tree.share.userData.name), у вас понизился уровень!", preferredStyle: .alert)
                                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                                      switch action.style{
@@ -326,6 +323,8 @@ class ViewController: UIViewController {
                                }}))
                                self.present(alert, animated: true, completion: nil)
             }
+            
+            defaults.set(index, forKey: "indexTree")
             
             self.treeImage?.image = self.listTree[index]
            }
