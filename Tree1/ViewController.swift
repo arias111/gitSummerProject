@@ -38,7 +38,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var drops: UILabel!
     @IBOutlet weak var treeImage: UIImageView!
     
-//    деревья
+   
+    //    деревья
     var listTree: [UIImage?] = [
         UIImage(named: "tree#1"),
         UIImage(named: "tree#2"),
@@ -81,18 +82,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let theDayToday = calendar.component(.day, from: date)
-        
-//        удаляю все данные перед проходом
-        defaults.removeObject(forKey: "GoodHabbitArray")
-        defaults.synchronize()
-        defaults.removeObject(forKey: "BadHabbitArray")
-        defaults.synchronize()
-        defaults.removeObject(forKey: "userData")
-        defaults.synchronize()
-        
-//        задаю данные пользователя
-        Tree.share.saveData(name: "Rustem", drops: 20, image: "", goodHabits: 0, badHabits: 0)
         
 //        для таблицы
         habbitsTableGood?.dataSource = self
@@ -105,38 +94,9 @@ class ViewController: UIViewController {
         habbitsTableGood?.register(UINib(nibName: "HabbitCell", bundle: nil) , forCellWithReuseIdentifier: cellIDGood)
         habbitsTableBad?.register(UINib(nibName: "HabbitCell", bundle: nil) , forCellWithReuseIdentifier: cellIDBad)
         
-//        для погоды календарь
-            let day = calendar.component(.day, from: date)
-            let hour = calendar.component(.hour, from: date)
-            let month = calendar.component(.month, from: date)
-        
-//        чтобы погода вычитала каждый день
-        if defaults.value(forKey: "WeatherDay") == nil {
-            defaults.set(32,forKey: "WeatherDay")
-        }
-        
-        let weatherday = defaults.value(forKey: "WeatherDay") as! Int
-        
-        if (weatherday != calendar.component(.day, from: date)){
-            minus = weatherDo(sender:day,hour:hour,month:month)
-            weatherVar?.text = String(minus)
-            minus = minus + vredDo(day:day)
-            Tree.share.userData.drops = Tree.share.userData.drops + minus
-        }
-        
-        if defaults.value(forKey: "ArrowDay") == nil {
-                  defaults.set(32,forKey: "ArrowDay")
-        }
-        
-              let arrowday = defaults.value(forKey: "ArrowDay") as! Int
-              if (arrowday != calendar.component(.day, from: date)){
-                defaults.set(0,forKey: "upDay")
-                defaults.set(0,forKey: "downDay")
-                }
+        weather()
         
         refreshAll()
-//        вызов дерева
-        reloadTree()
     }
     
     // MARK: - Plus
@@ -217,6 +177,37 @@ class ViewController: UIViewController {
             weatherText?.text = "Холодная погода"
             return -0;
         }
+    }
+    
+    func weather(){
+        //        для погоды календарь
+                    let day = calendar.component(.day, from: date)
+                    let hour = calendar.component(.hour, from: date)
+                    let month = calendar.component(.month, from: date)
+                
+        //        чтобы погода вычитала каждый день
+                if defaults.value(forKey: "WeatherDay") == nil {
+                    defaults.set(32,forKey: "WeatherDay")
+                }
+                
+                let weatherday = defaults.value(forKey: "WeatherDay") as! Int
+                
+                if (weatherday != calendar.component(.day, from: date)){
+                    minus = weatherDo(sender:day,hour:hour,month:month)
+                    weatherVar?.text = String(minus)
+                    minus = minus + vredDo(day:day)
+                    Tree.share.userData.drops = Tree.share.userData.drops + minus
+                }
+                
+                if defaults.value(forKey: "ArrowDay") == nil {
+                          defaults.set(32,forKey: "ArrowDay")
+                }
+                
+                      let arrowday = defaults.value(forKey: "ArrowDay") as! Int
+                      if (arrowday != calendar.component(.day, from: date)){
+                        defaults.set(0,forKey: "upDay")
+                        defaults.set(0,forKey: "downDay")
+                        }
     }
     
     // MARK: - Vred
@@ -352,33 +343,9 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let tr =  Tree.share
         let hb = Habbits.share
-        var time = String(calendar.component(.day, from: date)) + "." + String(calendar.component(.month, from: date)) + "." + String(calendar.component(.year, from: date))
+        let time = String(calendar.component(.day, from: date)) + "." + String(calendar.component(.month, from: date)) + "." + String(calendar.component(.year, from: date))
         print("time: ",time)
-        
-               //для хороших привычек обработка одного нажатия в день
-        if (collectionView == habbitsTableGood)&&(Habbits.share.GoodHabbitsArray.count != 0) {
-               if hb.GoodHabbitsArray[indexPath.item].date == "" {
-                    print("okey bro, just do it")
-                   hb.GoodHabbitsArray[indexPath.item].date = time
-               } else if !(hb.GoodHabbitsArray[indexPath.item].date.elementsEqual(time)) {
-                   hb.GoodHabbitsArray[indexPath.item].date = ""
-               } else {
-                print("мы попали в последний else")
-                   hb.GoodHabbitsArray[indexPath.item].priority -= hb.GoodHabbitsArray[indexPath.item].priority
-               }
-        } else {
-               //для плохих привычек обработка одного нажатия в день
-               if hb.BadHabbitsArray[indexPath.item].date == "" {
-                   hb.BadHabbitsArray[indexPath.item].date = time
-               } else if !(hb.BadHabbitsArray[indexPath.item].date.elementsEqual(time)) {
-                   hb.BadHabbitsArray[indexPath.item].date = ""
-               } else {
-                  print("мы попали в последний else")
-                   hb.BadHabbitsArray[indexPath.item].priority -= hb.BadHabbitsArray[indexPath.item].priority
-               }
-        }
-        
-        
+ 
         if del {
             if (collectionView == habbitsTableGood)&&(Habbits.share.GoodHabbitsArray.count != 0) {
                 hb.deleteGoodHabbit(index: indexPath.item)
@@ -388,18 +355,25 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
                 refreshAll()
             }
         } else {
-        if (collectionView == habbitsTableGood)&&(Habbits.share.GoodHabbitsArray.count != 0) {
+        if (collectionView == habbitsTableGood) {
+            if !(hb.GoodHabbitsArray[indexPath.item].date.elementsEqual(time)){
+                print("прошел")
             tr.saveData(name: tr.userData.name, drops: tr.userData.drops + hb.GoodHabbitsArray[indexPath.item].priority, image: "",goodHabits: tr.userData.goodHabits, badHabits: tr.userData.badHabits)
             var up = defaults.value(forKey: "upDay") as! Int
             up = up + hb.GoodHabbitsArray[indexPath.item].priority
+            hb.GoodHabbitsArray[indexPath.item].date = time
             defaults.set(up,forKey: "upDay")
             refreshAll()
+            }
         } else {
+            if !(hb.BadHabbitsArray[indexPath.item].date.elementsEqual(time)){
             tr.saveData(name: tr.userData.name, drops: tr.userData.drops + hb.BadHabbitsArray[indexPath.item].priority, image: "", goodHabits: tr.userData.goodHabits, badHabits: tr.userData.badHabits)
             var down = defaults.value(forKey: "downDay") as! Int
             down = down - hb.BadHabbitsArray[indexPath.item].priority
+            hb.BadHabbitsArray[indexPath.item].date = time
             defaults.set(down,forKey: "downDay")
             refreshAll()
+            }
         }
             }
     }
