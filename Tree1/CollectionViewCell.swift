@@ -1,0 +1,13 @@
+//
+//  CollectionViewCell.swift
+//  Tree1
+//
+//  Created by Рустем on 09.07.2020.
+//  Copyright © 2020 Рустем. All rights reserved.
+//
+
+import UIKit
+
+class CollectionViewCell: UICollectionViewCell {
+    
+}
