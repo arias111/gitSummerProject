@@ -32,6 +32,7 @@ class NewHabbit: UIViewController {
             Erorr.text = "Назовите привычку!"
             return
         }
+        //f
         if GoodOrBad.text == "НОВАЯ ПОЛЕЗНАЯ ПРИВЫЧКA"{
             if (Habbits.share.GoodHabbitsArray.count >= 8){
                   Erorr.text = "Максимальное кол-во!"
