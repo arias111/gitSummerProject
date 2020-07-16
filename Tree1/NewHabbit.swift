@@ -38,7 +38,7 @@ class NewHabbit: UIViewController {
                   Erorr.text = "Максимальное кол-во!"
                           return
             }
-            Habbits.share.saveGoodHabbit(name: NameHabbit.text!, priority: PriorityHabbit.selectedSegmentIndex + 1, color: "red", date: "")
+            Habbits.share.saveGoodHabbit(name: NameHabbit.text!, priority: PriorityHabbit.selectedSegmentIndex + 1, color: "red", date: "", isComplete: false)
             print("create good")
         }
         if GoodOrBad.text == "НОВАЯ ВРЕДНАЯ ПРИВЫЧКA"{
@@ -46,7 +46,7 @@ class NewHabbit: UIViewController {
                   Erorr.text = "Слишком много вредных привычек!"
                           return
             }
-            Habbits.share.saveBadHabbit(name: NameHabbit.text!, priority: (PriorityHabbit.selectedSegmentIndex + 1) * -1, color: "red", date: "")
+            Habbits.share.saveBadHabbit(name: NameHabbit.text!, priority: (PriorityHabbit.selectedSegmentIndex + 1) * -1, color: "red", date: "", isComplete: false)
             print("create bad")
         }
         tree.refreshAll()

@@ -15,11 +15,12 @@ class Habbits{
     static let share = Habbits()
     
 //    одна првычка
-    struct Habbit:Codable {
-        var name:String
-        var priority:Int
-        var color:String
+    struct Habbit: Codable {
+        var name: String
+        var priority: Int
+        var color: String
         var date: String
+        var isComplete: Bool
     }
     
     
@@ -42,8 +43,8 @@ class Habbits{
 
     }
 //    добавление хороших привычек в массив
-    func saveGoodHabbit(name:String, priority:Int, color:String, date: String){
-        let habbit = Habbit(name: name,priority: priority,color: color, date: date)
+    func saveGoodHabbit(name:String, priority:Int, color:String, date: String, isComplete: Bool){
+        let habbit = Habbit(name: name,priority: priority,color: color, date: date, isComplete: isComplete)
         GoodHabbitsArray.append(habbit)
         Tree.share.changeGood(number: 1)
     }
@@ -74,8 +75,8 @@ class Habbits{
         }
         
     //    добавление плохих привычки в массив
-    func saveBadHabbit(name:String, priority:Int, color:String, date: String){
-            let habbit = Habbit(name: name,priority: priority,color: color, date: date)
+    func saveBadHabbit(name:String, priority:Int, color:String, date: String, isComplete: Bool){
+        let habbit = Habbit(name: name,priority: priority,color: color, date: date, isComplete: isComplete)
             BadHabbitsArray.append(habbit)
             Tree.share.changeBad(number: 1)
         }

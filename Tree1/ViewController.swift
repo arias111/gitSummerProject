@@ -356,20 +356,39 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
     
 //    для отображения плашек
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let time = String(calendar.component(.day, from: date)) + String(calendar.component(.month, from: date)) + String(calendar.component(.year, from: date))
+        
+        if Habbits.share.GoodHabbitsArray[indexPath.item].date.elementsEqual(time) {
+            Habbits.share.GoodHabbitsArray[indexPath.item].isComplete = true
+        } else {
+            Habbits.share.GoodHabbitsArray[indexPath.item].isComplete = false
+        }
         if (collectionView == habbitsTableGood)&&(Habbits.share.GoodHabbitsArray.count != 0) {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIDGood, for: indexPath) as! HabbitCell
         cell.text.text = Habbits.share.GoodHabbitsArray[indexPath.item].name
         cell.color.backgroundColor = UIColor(patternImage: listColoursCell[indexPath.item]!)
         cell.index = indexPath.item
         cell.piority = Habbits.share.GoodHabbitsArray[indexPath.item].priority
+            
+        cell.isDone =
+            Habbits.share.GoodHabbitsArray[indexPath.item].isComplete
+        cell.configure()
         
         return cell
         } else {
+                    if Habbits.share.BadHabbitsArray[indexPath.item].date.elementsEqual(time) {
+                        Habbits.share.BadHabbitsArray[indexPath.item].isComplete = true
+                    } else {
+                        Habbits.share.BadHabbitsArray[indexPath.item].isComplete = false
+                    }
                     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIDBad, for: indexPath) as! HabbitCell
                     cell.text.text = Habbits.share.BadHabbitsArray[indexPath.item].name
                     cell.color.backgroundColor = UIColor(patternImage: listColoursCell[7 - (indexPath.item)]!)
                     cell.index = indexPath.item
                     cell.piority = Habbits.share.BadHabbitsArray[indexPath.item].priority
+                    cell.isDone =
+                        Habbits.share.BadHabbitsArray[indexPath.item].isComplete
+                    cell.configure()
                     return cell
         }
     }
@@ -381,6 +400,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: false)
         let tr =  Tree.share
         let hb = Habbits.share
         let time = String(calendar.component(.day, from: date)) + String(calendar.component(.month, from: date)) + String(calendar.component(.year, from: date))
@@ -398,6 +418,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
         if (collectionView == habbitsTableGood) {
             if !(hb.GoodHabbitsArray[indexPath.item].date.elementsEqual(time)){
                 print("прошел")
+                hb.GoodHabbitsArray[indexPath.item].isComplete = true
             tr.saveData(name: tr.userData.name, drops: tr.userData.drops + hb.GoodHabbitsArray[indexPath.item].priority, image: "",goodHabits: tr.userData.goodHabits, badHabits: tr.userData.badHabits)
             var up = defaults.value(forKey: "upDay") as! Int
             up = up + hb.GoodHabbitsArray[indexPath.item].priority
@@ -407,6 +428,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
             }
         } else {
             if !(hb.BadHabbitsArray[indexPath.item].date.elementsEqual(time)){
+                hb.BadHabbitsArray[indexPath.item].isComplete = true
             tr.saveData(name: tr.userData.name, drops: tr.userData.drops + hb.BadHabbitsArray[indexPath.item].priority, image: "", goodHabits: tr.userData.goodHabits, badHabits: tr.userData.badHabits)
             var down = defaults.value(forKey: "downDay") as! Int
             down = down - hb.BadHabbitsArray[indexPath.item].priority

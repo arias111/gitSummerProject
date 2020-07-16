@@ -12,12 +12,18 @@ class HabbitCell: UICollectionViewCell {
 
     @IBOutlet weak var text: UILabel!
     @IBOutlet weak var color: UIView!
+    @IBOutlet weak var isCompleteImage: UIImageView!
     
     var index:Int!
     var piority:Int!
+    var isDone: Bool?
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    func configure() {
+        if isDone == true {
+            isCompleteImage.image = UIImage(named: "checkMark")
+        } else {
+            isCompleteImage.image = UIImage(named: "cross")
+        }
     }
 
 }
