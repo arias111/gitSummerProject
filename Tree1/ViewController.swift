@@ -38,6 +38,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var drops: UILabel!
     @IBOutlet weak var treeImage: UIImageView!
     
+  
    
     //    деревья
     var listTree: [UIImage?] = [
@@ -286,6 +287,45 @@ class ViewController: UIViewController {
                         index = 6
                 }
             }
+            if defaults.value(forKey: "indexTree") == nil {
+                defaults.set(index, forKey: "indexTree")
+            }
+                
+            let index1 = defaults.value(forKey: "indexTree") as! Int
+            defaults.set(index, forKey: "indexTree")
+            
+            if index > index1 {
+                print("Поздравляю")
+                let alert = UIAlertController(title: "Поздравляем", message: "\(Tree.share.userData.name), вы достигли нового уровня!", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                      switch action.style{
+                      case .default:
+                            print("default")
+
+                      case .cancel:
+                            print("cancel")
+
+                      case .destructive:
+                            print("destructive")
+                }}))
+                self.present(alert, animated: true, completion: nil)
+            }
+            if index < index1 {
+                print("Не поздровляю")
+                let alert = UIAlertController(title: "Старайтесь!", message: "\(Tree.share.userData.name), у вас понизился уровень!", preferredStyle: .alert)
+                               alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                                     switch action.style{
+                                     case .default:
+                                           print("default")
+
+                                     case .cancel:
+                                           print("cancel")
+
+                                     case .destructive:
+                                           print("destructive")
+                               }}))
+                               self.present(alert, animated: true, completion: nil)
+            }
             
             self.treeImage?.image = self.listTree[index]
            }
@@ -323,6 +363,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
         cell.color.backgroundColor = UIColor(patternImage: listColoursCell[indexPath.item]!)
         cell.index = indexPath.item
         cell.piority = Habbits.share.GoodHabbitsArray[indexPath.item].priority
+        
         return cell
         } else {
                     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIDBad, for: indexPath) as! HabbitCell
@@ -343,7 +384,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let tr =  Tree.share
         let hb = Habbits.share
-        let time = String(calendar.component(.day, from: date)) + "." + String(calendar.component(.month, from: date)) + "." + String(calendar.component(.year, from: date))
+        let time = String(calendar.component(.day, from: date)) + String(calendar.component(.month, from: date)) + String(calendar.component(.year, from: date))
         print("time: ",time)
  
         if del {
