@@ -24,6 +24,7 @@ class NewHabbit: UIViewController {
         
 //       присвоем текст наверху который
         GoodOrBad.text = textHab
+        NameHabbit.becomeFirstResponder()
     }
     
 //    создает новую привычку

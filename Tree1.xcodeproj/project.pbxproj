@@ -18,6 +18,7 @@
 		0A61318924B779C50053CFF8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A61318824B779C50053CFF8 /* Assets.xcassets */; };
 		0A61318C24B779C50053CFF8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A61318A24B779C50053CFF8 /* LaunchScreen.storyboard */; };
 		0A61319B24B796F60053CFF8 /* HabbitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A61319924B796F60053CFF8 /* HabbitCell.swift */; };
+		0A9363E424C1B08400B00E5C /* WelcomeNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9363E324C1B08400B00E5C /* WelcomeNameViewController.swift */; };
 		0AB512E424BF0CB10083C3B7 /* Profil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB512E324BF0CB10083C3B7 /* Profil.swift */; };
 		E5E9CBF624C193C400CAD3D8 /* Welcome.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5E9CBF524C193C400CAD3D8 /* Welcome.storyboard */; };
 		E5E9CBF824C1949900CAD3D8 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E9CBF724C1949900CAD3D8 /* WelcomeViewController.swift */; };
@@ -37,6 +38,7 @@
 		0A61318B24B779C50053CFF8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A61318D24B779C50053CFF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A61319924B796F60053CFF8 /* HabbitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabbitCell.swift; sourceTree = "<group>"; };
+		0A9363E324C1B08400B00E5C /* WelcomeNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeNameViewController.swift; sourceTree = "<group>"; };
 		0AB512E324BF0CB10083C3B7 /* Profil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profil.swift; sourceTree = "<group>"; };
 		E5E9CBF524C193C400CAD3D8 /* Welcome.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Welcome.storyboard; sourceTree = "<group>"; };
 		E5E9CBF724C1949900CAD3D8 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				0AB512E324BF0CB10083C3B7 /* Profil.swift */,
 				0A61318D24B779C50053CFF8 /* Info.plist */,
 				E5E9CBF524C193C400CAD3D8 /* Welcome.storyboard */,
+				0A9363E324C1B08400B00E5C /* WelcomeNameViewController.swift */,
 				E5E9CBF724C1949900CAD3D8 /* WelcomeViewController.swift */,
 			);
 			path = Tree1;
@@ -168,6 +171,7 @@
 				0A5981F224B9F24F0029A2C6 /* Tree.swift in Sources */,
 				0A61318424B779C30053CFF8 /* ViewController.swift in Sources */,
 				0A61319B24B796F60053CFF8 /* HabbitCell.swift in Sources */,
+				0A9363E424C1B08400B00E5C /* WelcomeNameViewController.swift in Sources */,
 				0AB512E424BF0CB10083C3B7 /* Profil.swift in Sources */,
 				0A58844B24B861D4006583AD /* NewHabbit.swift in Sources */,
 				0A61318024B779C30053CFF8 /* AppDelegate.swift in Sources */,
@@ -323,7 +327,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = test.team.rustem;
+				PRODUCT_BUNDLE_IDENTIFIER = test.team.MyTree;
 				PRODUCT_NAME = tester3;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -341,7 +345,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = test.team.rustem;
+				PRODUCT_BUNDLE_IDENTIFIER = test.team.MyTree;
 				PRODUCT_NAME = tester3;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
