@@ -46,7 +46,6 @@ class Habbits{
     func saveGoodHabbit(name:String, priority:Int, color:String, date: String, isComplete: Bool){
         let habbit = Habbit(name: name,priority: priority,color: color, date: date, isComplete: isComplete)
         GoodHabbitsArray.append(habbit)
-        Tree.share.changeGood(number: 1)
     }
     
     func deleteGoodHabbit(index: Int){
@@ -78,7 +77,6 @@ class Habbits{
     func saveBadHabbit(name:String, priority:Int, color:String, date: String, isComplete: Bool){
         let habbit = Habbit(name: name,priority: priority,color: color, date: date, isComplete: isComplete)
             BadHabbitsArray.append(habbit)
-            Tree.share.changeBad(number: 1)
         }
     
     func deleteBadHabbit(index: Int){
