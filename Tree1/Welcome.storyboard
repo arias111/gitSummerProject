@@ -77,8 +77,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <attributedString key="attributedText">
                                     <fragment>
-                                        <string key="content">В зависимости от выбранного приоритета после выполнения привычки вам будут начисляться или сниматься &lt;капли&gt;. С их помощью вы сможете поливать свое дерево.</string>
+                                        <string key="content">В зависимости от выбранного приоритета после выполнения привычки вам будут начисляться или сниматься &lt;капли&gt;. От них будет зависеть состояние и рост дерева.</string>
                                         <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" size="22" name="Helvetica"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>

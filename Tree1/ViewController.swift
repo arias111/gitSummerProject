@@ -131,7 +131,7 @@ class ViewController: UIViewController {
     func refreshAll(){
         let x = Tree.share.userData.drops
         reloadTree()
-        drops?.text = String(x)
+        drops?.text = String("Капель: \(x)")
         let up = defaults.value(forKey: "upDay") as! Int
         let down = defaults.value(forKey: "downDay") as! Int
         upDay.text = String(up)
@@ -385,10 +385,9 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
 //    рамеры плашек
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 //        размер всего экрана = 400 , промежутки = 5*10,
-        return CGSize(width: 85, height: 70)
+        return CGSize(width: 88, height: 70)
     }
     
-//    нажатие кнопки
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: false)
         let tr =  Tree.share
@@ -410,23 +409,21 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
                 print("прошел")
                 hb.GoodHabbitsArray[indexPath.item].isComplete = true
                 tr.saveData(name: tr.userData.name, drops: tr.userData.drops + hb.GoodHabbitsArray[indexPath.item].priority, image: "",goodHabits: tr.userData.goodHabits, badHabits: tr.userData.badHabits, isNewUser: tr.userData.isNewUser)
-                var up = defaults.value(forKey: "upDay") as! Int
-                up = up + hb.GoodHabbitsArray[indexPath.item].priority
-                hb.GoodHabbitsArray[indexPath.item].date = time
-                defaults.set(up,forKey: "upDay")
-                refreshAll()
-                Tree.share.changeGood(number: 1)
+            var up = defaults.value(forKey: "upDay") as! Int
+            up = up + hb.GoodHabbitsArray[indexPath.item].priority
+            hb.GoodHabbitsArray[indexPath.item].date = time
+            defaults.set(up,forKey: "upDay")
+            refreshAll()
             }
         } else {
             if !(hb.BadHabbitsArray[indexPath.item].date.elementsEqual(time)){
                 hb.BadHabbitsArray[indexPath.item].isComplete = true
                 tr.saveData(name: tr.userData.name, drops: tr.userData.drops + hb.BadHabbitsArray[indexPath.item].priority, image: "", goodHabits: tr.userData.goodHabits, badHabits: tr.userData.badHabits, isNewUser: tr.userData.isNewUser)
-                var down = defaults.value(forKey: "downDay") as! Int
-                down = down - hb.BadHabbitsArray[indexPath.item].priority
-                hb.BadHabbitsArray[indexPath.item].date = time
-                defaults.set(down,forKey: "downDay")
-                refreshAll()
-                Tree.share.changeBad(number: 1)
+            var down = defaults.value(forKey: "downDay") as! Int
+            down = down - hb.BadHabbitsArray[indexPath.item].priority
+            hb.BadHabbitsArray[indexPath.item].date = time
+            defaults.set(down,forKey: "downDay")
+            refreshAll()
             }
         }
             }
