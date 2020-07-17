@@ -20,9 +20,9 @@ class HabbitCell: UICollectionViewCell {
     
     func configure() {
         if isDone == true {
-            isCompleteImage.image = UIImage(named: "checkMark")
+            isCompleteImage.image = UIImage(named: "completeCheckMark")
         } else {
-            isCompleteImage.image = UIImage(named: "cross")
+            isCompleteImage.image = UIImage(named: "noCompleteCheckMark")
         }
     }
 
