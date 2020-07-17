@@ -119,7 +119,7 @@ class ViewController: UIViewController {
     func refreshAll(){
         let x = Tree.share.userData.drops
         reloadTree()
-        drops?.text = "Каль:\( x )"
+        drops?.text = String(x)
         let up = defaults.value(forKey: "upDay") as! Int
         let down = defaults.value(forKey: "downDay") as! Int
         upDay.text = String(up)
@@ -252,15 +252,15 @@ class ViewController: UIViewController {
                 print(up)
                 print(down)
             switch value {
-                case 0...10 :
+                case 0...5 :
                     index = 0
-                case 11...20 :
+                case 6...10 :
                     index = 1
-                case 21...30 :
+                case 11...15 :
                     index = 2
-                case 31...40 :
+                case 16...20 :
                     index = 3
-                case 41...50:
+                case 21...25:
                     index = 4
                 case 51...INTPTR_MAX:
                     index = 5
@@ -271,15 +271,15 @@ class ViewController: UIViewController {
             } else {
                 print("ploho")
                 switch value {
-                    case 0...10 :
+                    case 0...5 :
                         index = 6
-                    case 11...20 :
+                    case 6...10 :
                         index = 7
-                    case 21...30 :
+                    case 11...15 :
                         index = 8
-                    case 31...40 :
+                    case 16...20 :
                         index = 9
-                    case 41...50:
+                    case 21...25:
                         index = 10
                     case 51...INTPTR_MAX:
                         index = 11
@@ -369,9 +369,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
         cell.color.backgroundColor = UIColor(patternImage: listColoursCell[indexPath.item]!)
         cell.index = indexPath.item
         cell.piority = Habbits.share.GoodHabbitsArray[indexPath.item].priority
-            
-        cell.isDone =
-            Habbits.share.GoodHabbitsArray[indexPath.item].isComplete
+        cell.isDone = Habbits.share.GoodHabbitsArray[indexPath.item].isComplete
         cell.configure()
         
         return cell
@@ -386,8 +384,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
                     cell.color.backgroundColor = UIColor(patternImage: listColoursCell[7 - (indexPath.item)]!)
                     cell.index = indexPath.item
                     cell.piority = Habbits.share.BadHabbitsArray[indexPath.item].priority
-                    cell.isDone =
-                        Habbits.share.BadHabbitsArray[indexPath.item].isComplete
+                    cell.isDone = Habbits.share.BadHabbitsArray[indexPath.item].isComplete
                     cell.configure()
                     return cell
         }

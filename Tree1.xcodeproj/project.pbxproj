@@ -27,7 +27,7 @@
 		0A58843E24B7C25A006583AD /* HabbitCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HabbitCell.xib; sourceTree = "<group>"; };
 		0A58844A24B861D4006583AD /* NewHabbit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHabbit.swift; sourceTree = "<group>"; };
 		0A5981F124B9F24F0029A2C6 /* Tree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tree.swift; sourceTree = "<group>"; };
-		0A61317C24B779C30053CFF8 /* Tree1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tree1.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A61317C24B779C30053CFF8 /* tester3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tester3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A61317F24B779C30053CFF8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A61318124B779C30053CFF8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		0A61318324B779C30053CFF8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -60,7 +60,7 @@
 		0A61317D24B779C30053CFF8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0A61317C24B779C30053CFF8 /* Tree1.app */,
+				0A61317C24B779C30053CFF8 /* tester3.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -102,7 +102,7 @@
 			);
 			name = Tree1;
 			productName = Tree1;
-			productReference = 0A61317C24B779C30053CFF8 /* Tree1.app */;
+			productReference = 0A61317C24B779C30053CFF8 /* tester3.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -316,7 +316,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = test.team.rustem;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = tester3;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -334,7 +334,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = test.team.rustem;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = tester3;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
