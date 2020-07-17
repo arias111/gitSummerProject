@@ -114,6 +114,11 @@ class ViewController: UIViewController {
             newVC.textHab = "НОВАЯ ВРЕДНАЯ ПРИВЫЧКA"
             newVC.tree = self
         }
+        
+        if segue.identifier == "Profil" {
+        let newVC = segue.destination as! Profil
+            newVC.tree = self
+        }
     }
     
     func refreshAll(){
@@ -295,32 +300,12 @@ class ViewController: UIViewController {
             
             if (index > index1)&&(index < 6)&&(index1 < 6) {
                 let alert = UIAlertController(title: "Поздравляем", message: "\(Tree.share.userData.name), вы достигли нового уровня!", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-                      switch action.style{
-                      case .default:
-                            print("default")
-
-                      case .cancel:
-                            print("cancel")
-
-                      case .destructive:
-                            print("destructive")
-                }}))
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             }
             if (index < index1)&&(index < 6)&&(index1 < 6) {
                 let alert = UIAlertController(title: "Старайтесь!", message: "\(Tree.share.userData.name), у вас понизился уровень!", preferredStyle: .alert)
-                               alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-                                     switch action.style{
-                                     case .default:
-                                           print("default")
-
-                                     case .cancel:
-                                           print("cancel")
-
-                                     case .destructive:
-                                           print("destructive")
-                               }}))
+                               alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                                self.present(alert, animated: true, completion: nil)
             }
             
