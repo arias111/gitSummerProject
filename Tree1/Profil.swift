@@ -39,7 +39,7 @@ class Profil: UIViewController {
             
     //      кнопка сохранения изменения имени пользователя
             @IBAction func changeUsernameButton(_ sender: Any) {
-                Tree.share.saveData(name: (textUsername?.text)!, drops: Tree.share.userData.drops, image: Tree.share.userData.image, goodHabits: Tree.share.userData.goodHabits, badHabits: Tree.share.userData.badHabits)
+                Tree.share.saveData(name: (textUsername?.text)!, drops: Tree.share.userData.drops, image: Tree.share.userData.image, goodHabits: Tree.share.userData.goodHabits, badHabits: Tree.share.userData.badHabits, isNewUser: false)
                 dismiss(animated: true, completion: nil)
             }
     
