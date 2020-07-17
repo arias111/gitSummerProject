@@ -388,6 +388,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
         return CGSize(width: 85, height: 70)
     }
     
+//    нажатие кнопки
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: false)
         let tr =  Tree.share
