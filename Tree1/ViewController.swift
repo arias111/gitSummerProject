@@ -81,6 +81,13 @@ class ViewController: UIViewController {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+       
+           if (isNewUser()){
+               loadOnboardingScreen()
+           }
+       }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -416,7 +423,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
             if !(hb.GoodHabbitsArray[indexPath.item].date.elementsEqual(time)){
                 print("прошел")
                 hb.GoodHabbitsArray[indexPath.item].isComplete = true
-            tr.saveData(name: tr.userData.name, drops: tr.userData.drops + hb.GoodHabbitsArray[indexPath.item].priority, image: "",goodHabits: tr.userData.goodHabits, badHabits: tr.userData.badHabits)
+                tr.saveData(name: tr.userData.name, drops: tr.userData.drops + hb.GoodHabbitsArray[indexPath.item].priority, image: "",goodHabits: tr.userData.goodHabits, badHabits: tr.userData.badHabits, isNewUser: tr.userData.isNewUser)
             var up = defaults.value(forKey: "upDay") as! Int
             up = up + hb.GoodHabbitsArray[indexPath.item].priority
             hb.GoodHabbitsArray[indexPath.item].date = time
@@ -426,7 +433,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
         } else {
             if !(hb.BadHabbitsArray[indexPath.item].date.elementsEqual(time)){
                 hb.BadHabbitsArray[indexPath.item].isComplete = true
-            tr.saveData(name: tr.userData.name, drops: tr.userData.drops + hb.BadHabbitsArray[indexPath.item].priority, image: "", goodHabits: tr.userData.goodHabits, badHabits: tr.userData.badHabits)
+                tr.saveData(name: tr.userData.name, drops: tr.userData.drops + hb.BadHabbitsArray[indexPath.item].priority, image: "", goodHabits: tr.userData.goodHabits, badHabits: tr.userData.badHabits, isNewUser: tr.userData.isNewUser)
             var down = defaults.value(forKey: "downDay") as! Int
             down = down - hb.BadHabbitsArray[indexPath.item].priority
             hb.BadHabbitsArray[indexPath.item].date = time
@@ -435,6 +442,18 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,U
             }
         }
             }
+    }
+    // MARK: - Onboarding Screen
+    
+    func isNewUser() -> Bool {
+        return Tree.share.userData.isNewUser
+    }
+    func loadOnboardingScreen(){
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Welcome", bundle: nil)
+        let secondVC = storyBoard.instantiateViewController(identifier: "Welcome")
+        secondVC.modalPresentationStyle = .fullScreen
+        show(secondVC, sender: self)
+        Tree.share.setNotNewUser()
     }
 }
 
